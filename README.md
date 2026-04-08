@@ -4,7 +4,7 @@ A modern React application for the Arada Sub-City Code Enforcement Authority, de
 
 ## 🌐 Live Website
 The application is live and accessible at:
-### **[abeyeshitila81.github.io/arada-code-enforcement/](https://abeyeshitila81.github.io/arada-code-enforcement/)**
+### **[/arada-code-enforcement/](https://abeyeshitila81.github.io/arada-code-enforcement/)**
 
 ---
 
