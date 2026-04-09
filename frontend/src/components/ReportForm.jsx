@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { db } from '../firebase';
+import { collection, addDoc, getDocs, query, orderBy } from 'firebase/firestore';
 
 const ReportForm = () => {
   const [formData, setFormData] = useState({
@@ -18,24 +20,58 @@ const ReportForm = () => {
     setFormData((prev) => ({ ...prev, [id]: value }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const newReport = {
-      ...formData,
-      id: Date.now(),
-      timestamp: new Date().toLocaleString(),
+  useEffect(() => {
+    const fetchReports = async () => {
+      try {
+        const q = query(collection(db, "reports"), orderBy("timestamp", "desc"));
+        const querySnapshot = await getDocs(q);
+        const reportsData = [];
+        querySnapshot.forEach((doc) => {
+          // Format date for display just like before
+          const rawData = doc.data();
+          const displayDate = new Date(rawData.timestamp).toLocaleString();
+          reportsData.push({ id: doc.id, ...rawData, timestamp: displayDate });
+        });
+        setSubmittedReports(reportsData);
+      } catch (error) {
+        console.error("Error fetching reports, probably missing Firebase config: ", error);
+      }
     };
-    setSubmittedReports((prev) => [newReport, ...prev]);
-    alert('Report Submitted Successfully! (ሪፖርቱ በትክክል ተልኳል)');
-    setFormData({
-      reporterName: '',
-      violationWereda: '',
-      violationType: '',
-      violationRule: '',
-      penaltyAmount: '',
-      dailyStatus: '',
-      violationDescription: '',
-    });
+    fetchReports();
+  }, []);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const newReportData = {
+        ...formData,
+        timestamp: new Date().toISOString(),
+      };
+      
+      // Save to Firebase
+      const docRef = await addDoc(collection(db, "reports"), newReportData);
+      
+      const newReport = {
+        ...newReportData,
+        id: docRef.id,
+        timestamp: new Date().toLocaleString()
+      };
+
+      setSubmittedReports((prev) => [newReport, ...prev]);
+      alert('Report Submitted Successfully! (ሪፖርቱ በትክክል ተልኳል)');
+      setFormData({
+        reporterName: '',
+        violationWereda: '',
+        violationType: '',
+        violationRule: '',
+        penaltyAmount: '',
+        dailyStatus: '',
+        violationDescription: '',
+      });
+    } catch (error) {
+      console.error("Error adding document: ", error);
+      alert("Error submitting report. Please check configuration.");
+    }
   };
 
   return (
