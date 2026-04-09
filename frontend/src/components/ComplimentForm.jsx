@@ -120,7 +120,6 @@ const ComplimentForm = () => {
       </form>
     </section>
   );
-  );
 };
 
 export default ComplimentForm;

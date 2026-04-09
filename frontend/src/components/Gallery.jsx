@@ -8,10 +8,10 @@ import img4 from '../assets/img4.jpg';
 
 const Gallery = () => {
   const images = [
-    { src: img1, title: 'Community Meeting', desc: 'Discussing local safety regulations.' },
-    { src: img2, title: 'Inauguration Ceremony', desc: 'Official office opening event.' },
-    { src: img3, title: 'Training Session', desc: 'Empowering our enforcement officers.' },
-    { src: img4, title: 'Field Inspection', desc: 'Ensuring standards are met daily.' },
+    { src: img1, title: 'Stakeholders Training', desc: 'Engaging with community leaders and stakeholders.' },
+    { src: img2, title: 'Official Briefing', desc: 'Official announcement and regulatory updates.' },
+    { src: img3, title: 'Officer Orientation', desc: 'Internal staff training and code of conduct review.' },
+    { src: img4, title: 'Collaborative Meeting', desc: 'Working together for a safer and cleaner sub-city.' },
   ];
 
   return (
