@@ -50,14 +50,7 @@ const ReportForm = () => {
 
   return (
     <div className="max-w-6xl mx-auto">
-      <section id="report" className="bg-white p-8 md:p-12 rounded-2xl shadow-sm border border-gray-100 mb-12">
-        <div className="text-center mb-10">
-          <h2 className="text-3xl font-bold text-primary mb-3">Finance Report form (የፋይናንስ ሪፖርት መላኪያ ቅፅ)</h2>
-          <p className="text-textLight max-w-2xl mx-auto">
-            Please fill out the form below to report a code violation. Your report helps us act quickly.
-          </p>
-        </div>
-
+      <section id="report" className="bg-white p-8 md:p-12 rounded-2xl shadow-md border border-gray-100 mb-12 transition-all hover:shadow-lg">
         <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="form-group">
             <label htmlFor="reporterName" className="block font-semibold mb-2 text-textDark">👤 Full Name (ሙሉ ስም)</label>

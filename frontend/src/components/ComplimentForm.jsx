@@ -44,74 +44,82 @@ const ComplimentForm = () => {
   };
 
   return (
-    <section id="compliment" className="bg-white p-12 rounded-md shadow-sm max-w-[800px] mx-auto mb-16 border-t-[5px] border-[#27ae60]">
-      <div className="flex justify-center mb-4 text-5xl">🌟</div>
-      <h2 className="text-2xl font-bold text-center text-[#27ae60] border-b-2 border-gray-200 inline-block pb-2 mb-4 mx-auto block w-fit">
-        Submit a Compliment (አድናቆት መግለጫ ቅፅ)
-      </h2>
-      <p className="text-center text-textLight mb-8">
+    <section id="compliment" className="bg-white p-8 md:p-12 rounded-2xl shadow-md max-w-[800px] mx-auto border border-gray-100 transition-all hover:shadow-lg">
+      <div className="flex justify-center mb-6">
+        <div className="w-20 h-20 bg-greenTint rounded-full flex items-center justify-center text-4xl shadow-inner border border-white/50 animate-float">🌟</div>
+      </div>
+      
+      <p className="text-center text-textLight mb-10 text-lg font-light leading-relaxed">
         Did one of our officers do a great job? Have you noticed improvements in your area? Let us know below!
       </p>
+
       <form onSubmit={handleSubmit} className="space-y-6">
-        <div className="form-group">
-          <label htmlFor="comp-name" className="block font-semibold mb-2 text-textDark">👤ስም:(Optional)</label>
-          <input 
-            type="text" id="comp-name" placeholder="Alemu" 
-            value={formData.name} onChange={handleChange}
-            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-[#27ae60] focus:ring-2 focus:ring-[#27ae60]/10 transition-all font-sans" 
-          />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="form-group">
+            <label htmlFor="comp-name" className="block font-semibold mb-2 text-textDark text-sm">👤 Full Name (Optional)</label>
+            <input 
+              type="text" id="comp-name" placeholder="Enter your name" 
+              value={formData.name} onChange={handleChange}
+              className="w-full p-3.5 border border-gray-200 rounded-xl focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/5 transition-all outline-none" 
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="comp-phone" className="block font-semibold mb-2 text-textDark text-sm">📱 Your Phone (ስልክ ቁጥር) </label>
+            <input 
+              type="tel" id="comp-phone" placeholder="+251..." 
+              required value={formData.phone} onChange={handleChange}
+              className="w-full p-3.5 border border-gray-200 rounded-xl focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/5 transition-all outline-none" 
+            />
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="form-group">
+            <label htmlFor="comp-wereda" className="block font-semibold mb-2 text-textDark text-sm">Select Woreda (ወረዳ)</label>
+            <select id="comp-wereda" required value={formData.wereda} onChange={handleChange} className="w-full p-3.5 border border-gray-200 rounded-xl focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/5 transition-all bg-white outline-none">
+              <option value="">Choose Woreda-- </option>
+              <option value="1">ወረዳ 01</option>
+              <option value="2">ወረዳ 02</option>
+              <option value="4">ወረዳ 04</option>
+              <option value="5">ወረዳ 05</option>
+              <option value="6">ወረዳ 06</option>
+              <option value="7">ወረዳ 07</option>
+              <option value="8">ወረዳ 08</option>
+              <option value="9">ወረዳ 09</option>
+              <option value="all">Sub-City General (በአጠቃላይ)</option>
+            </select>
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="comp-topic" className="block font-semibold mb-2 text-textDark text-sm">Compliment Topic (ርዕስ)</label>
+            <select id="comp-topic" required value={formData.topic} onChange={handleChange} className="w-full p-3.5 border border-gray-200 rounded-xl focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/5 transition-all bg-white outline-none">
+              <option value="">-- Select Topic -- </option>
+              <option value="officer">Excellent Service by an Officer</option>
+              <option value="cleanliness">Improved Area Cleanliness</option>
+              <option value="response">Fast Response Time</option>
+              <option value="other">Other (ሌላ)</option>
+            </select>
+          </div>
         </div>
 
         <div className="form-group">
-          <label htmlFor="comp-phone" className="block font-semibold mb-2 text-textDark">📱Your Phone(ስልክ ቁጥር) </label>
-          <input 
-            type="tel" id="comp-phone" placeholder="+251..." 
-            required value={formData.phone} onChange={handleChange}
-            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-[#27ae60] focus:ring-2 focus:ring-[#27ae60]/10 transition-all font-sans" 
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="comp-wereda" className="block font-semibold mb-2 text-textDark">Select Woreda ( ወረዳ )</label>
-          <select id="comp-wereda" required value={formData.wereda} onChange={handleChange} className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-[#27ae60] focus:ring-2 focus:ring-[#27ae60]/10 transition-all font-sans bg-white">
-            <option value="">ወረዳ-- </option>
-            <option value="1">ወረዳ 01</option>
-            <option value="2">ወረዳ 02</option>
-            <option value="4">ወረዳ 04</option>
-            <option value="5">ወረዳ 05</option>
-            <option value="6">ወረዳ 06</option>
-            <option value="7">ወረዳ 07</option>
-            <option value="8">ወረዳ 08</option>
-            <option value="9">ወረዳ 09</option>
-            <option value="all">Sub-City General (በአጠቃላይ)</option>
-          </select>
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="comp-topic" className="block font-semibold mb-2 text-textDark">Compliment Topic (የአድናቆት ርዕስ)</label>
-          <select id="comp-topic" required value={formData.topic} onChange={handleChange} className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-[#27ae60] focus:ring-2 focus:ring-[#27ae60]/10 transition-all font-sans bg-white">
-            <option value="">-- Select Topic -- </option>
-            <option value="officer">Excellent Service by an Officer (ጥሩ አገልግሎት)</option>
-            <option value="cleanliness">Improved Area Cleanliness (የአካባቢ ጽዳት)</option>
-            <option value="response">Fast Response Time (ፈጣን ምላሽ)</option>
-            <option value="other">Other (ሌላ)</option>
-          </select>
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="comp-message" className="block font-semibold mb-2 text-textDark">Message (መልእክት)</label>
+          <label htmlFor="comp-message" className="block font-semibold mb-2 text-textDark text-sm">Message (መልእክት)</label>
           <textarea 
             id="comp-message" placeholder="Share your positive feedback..." 
             required value={formData.message} onChange={handleChange}
-            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-[#27ae60] focus:ring-2 focus:ring-[#27ae60]/10 transition-all font-sans min-h-[120px] resize-y"
+            className="w-full p-4 border border-gray-200 rounded-2xl focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/5 transition-all min-h-[150px] resize-y outline-none"
           ></textarea>
         </div>
 
-        <div className="text-center">
-          <button type="submit" className="inline-block bg-[#27ae60] text-white py-3 px-6 rounded-full font-semibold no-underline mt-4 transition-all duration-300 transform hover:bg-[#219653] hover:scale-105 border-0 cursor-pointer min-w-[200px]">Send Compliment</button>
+        <div className="text-center pt-4">
+          <button type="submit" className="btn min-w-[280px] py-4 shadow-lg hover:shadow-xl">
+            Send Compliment (አድናቆት ላክ)
+          </button>
         </div>
       </form>
     </section>
+  );
   );
 };
 

@@ -15,6 +15,7 @@ import AnnouncementTicker from './components/AnnouncementTicker';
 import Footer from './components/Footer';
 import AdminDashboard from './components/AdminDashboard';
 import TopBar from './components/TopBar';
+import PageBanner from './components/PageBanner';
 
 // A simple Home wrapper component for the homepage content
 const Home = () => (
@@ -42,12 +43,54 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/services" element={<Services />} />
-        <Route path="/news" element={<News />} />
-        <Route path="/documents" element={<Documents />} />
-        <Route path="/report" element={<main className="py-16 lg:py-24 flex-grow bg-bgLight px-5"><ReportForm /></main>} />
-        <Route path="/compliment" element={<main className="py-16 lg:py-24 flex-grow bg-bgLight px-5"><ComplimentForm /></main>} />
-        <Route path="/admin" element={<main className="py-16 lg:py-24 flex-grow bg-bgLight px-5"><AdminDashboard /></main>} />
+        <Route path="/services" element={
+          <main className="flex-grow bg-bgLight">
+            <PageBanner title="Our Services" subtitle="Discover how we serve and protect our community." />
+            <div className="max-w-[1200px] mx-auto px-5 pb-16">
+              <Services />
+            </div>
+          </main>
+        } />
+        <Route path="/news" element={
+          <main className="flex-grow bg-bgLight">
+            <PageBanner title="Latest News" subtitle="Stay updated with the latest news and announcements." />
+            <div className="max-w-[1200px] mx-auto px-5 pb-16">
+              <News />
+            </div>
+          </main>
+        } />
+        <Route path="/documents" element={
+          <main className="flex-grow bg-bgLight">
+            <PageBanner title="Official Documents" subtitle="Access regulatory documents and city guidelines." />
+            <div className="max-w-[1200px] mx-auto px-5 pb-16">
+              <Documents />
+            </div>
+          </main>
+        } />
+        <Route path="/report" element={
+          <main className="flex-grow bg-bgLight">
+            <PageBanner title="Finance Report" subtitle="Please fill out the form below to report a code violation." />
+            <div className="max-w-[1200px] mx-auto px-5 -mt-12 relative z-20 pb-16">
+              <ReportForm />
+            </div>
+          </main>
+        } />
+        <Route path="/compliment" element={
+          <main className="flex-grow bg-bgLight">
+            <PageBanner title="Submit a Compliment" subtitle="Did one of our officers do a great job? Let us know!" />
+            <div className="max-w-[1200px] mx-auto px-5 -mt-12 relative z-20 pb-16">
+              <ComplimentForm />
+            </div>
+          </main>
+        } />
+        <Route path="/admin" element={
+          <main className="flex-grow bg-bgLight">
+            <PageBanner title="Admin Dashboard" subtitle="Manage reports and system configurations." />
+            <div className="max-w-[1200px] mx-auto px-5 pb-16">
+              <AdminDashboard />
+            </div>
+          </main>
+        } />
       </Routes>
 
       <Footer />
