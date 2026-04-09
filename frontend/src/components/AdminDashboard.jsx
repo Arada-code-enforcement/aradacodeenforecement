@@ -18,6 +18,9 @@ const AdminDashboard = () => {
   const [editingReport, setEditingReport] = useState(null);
   const [editingCompliment, setEditingCompliment] = useState(null);
 
+  // Loading States for Exports
+  const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
@@ -179,19 +182,31 @@ const AdminDashboard = () => {
   };
 
   // --- PDF EXPORT HANDLER ---
-  const downloadPDF = (elementId, filename) => {
+  const downloadPDF = async (elementId, filename) => {
     const element = document.getElementById(elementId);
     if (!element) return;
 
-    const opt = {
-      margin: [0.5, 0.5],
-      filename: `${filename}_${new Date().toISOString().split('T')[0]}.pdf`,
-      image: { type: 'jpeg', quality: 0.98 },
-      html2canvas: { scale: 2, useCORS: true, letterRendering: true },
-      jsPDF: { unit: 'in', format: 'letter', orientation: 'landscape' }
-    };
+    setIsGeneratingPDF(true);
+    try {
+      const opt = {
+        margin: [0.5, 0.5],
+        filename: `${filename}_${new Date().toISOString().split('T')[0]}.pdf`,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { 
+          scale: 1.5, // Reduced from 2 for better performance
+          useCORS: true, 
+          logging: false 
+        },
+        jsPDF: { unit: 'in', format: 'letter', orientation: 'landscape' }
+      };
 
-    html2pdf().set(opt).from(element).save();
+      await html2pdf().set(opt).from(element).save();
+    } catch (error) {
+      console.error("PDF Generation Error:", error);
+      alert("Error generating PDF. Please try again.");
+    } finally {
+      setIsGeneratingPDF(false);
+    }
   };
 
   if (loading) {
@@ -275,9 +290,14 @@ const AdminDashboard = () => {
                 </button>
                 <button 
                   onClick={() => downloadPDF("reports-table", "Finance_Reports")}
-                  className="flex items-center gap-2 bg-gray-100 text-gray-700 hover:bg-gray-200 px-4 py-2 rounded-lg font-bold transition-all text-sm border border-gray-200"
+                  disabled={isGeneratingPDF}
+                  className={`flex items-center gap-2 px-4 py-2 rounded-lg font-bold transition-all text-sm border ${
+                    isGeneratingPDF 
+                      ? 'bg-gray-50 text-gray-400 border-gray-100 cursor-not-allowed' 
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200 border-gray-200'
+                  }`}
                 >
-                  <span>📄 Download PDF</span>
+                  <span>{isGeneratingPDF ? '⌛ Generating...' : '📄 Download PDF'}</span>
                 </button>
               </div>
             </div>
@@ -340,9 +360,14 @@ const AdminDashboard = () => {
                 </button>
                 <button 
                   onClick={() => downloadPDF("compliments-table", "Compliments")}
-                  className="flex items-center gap-2 bg-gray-100 text-gray-700 hover:bg-gray-200 px-4 py-2 rounded-lg font-bold transition-all text-sm border border-gray-200"
+                  disabled={isGeneratingPDF}
+                  className={`flex items-center gap-2 px-4 py-2 rounded-lg font-bold transition-all text-sm border ${
+                    isGeneratingPDF 
+                      ? 'bg-gray-50 text-gray-400 border-gray-100 cursor-not-allowed' 
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200 border-gray-200'
+                  }`}
                 >
-                  <span>📄 Download PDF</span>
+                  <span>{isGeneratingPDF ? '⌛ Generating...' : '📄 Download PDF'}</span>
                 </button>
               </div>
             </div>
