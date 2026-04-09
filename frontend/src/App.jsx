@@ -6,7 +6,6 @@ import CardsSection from './components/CardsSection';
 import OrganizationInfo from './components/OrganizationInfo';
 import ReportForm from './components/ReportForm';
 import ComplimentForm from './components/ComplimentForm';
-import AboutContact from './components/AboutContact';
 import Services from './components/Services';
 import News from './components/News';
 import Documents from './components/Documents';
@@ -26,7 +25,6 @@ const Home = () => (
       <div className="max-w-[1200px] mx-auto px-5">
         <CardsSection />
         <OrganizationInfo />
-        <AboutContact />
       </div>
     </main>
   </>
