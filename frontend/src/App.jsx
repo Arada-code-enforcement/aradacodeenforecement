@@ -35,9 +35,8 @@ function App() {
     <div className="min-h-screen flex flex-col font-sans">
       <div className="fixed top-0 w-full z-[60]">
         <TopBar />
-        <AnnouncementTicker />
       </div>
-      <div className="mt-[82px] transition-all duration-300">
+      <div className="mt-[40px] transition-all duration-300">
         <Navbar />
       </div>
 
