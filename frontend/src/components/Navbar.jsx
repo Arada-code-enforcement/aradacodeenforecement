@@ -76,13 +76,7 @@ const Navbar = () => {
         </div>
 
         {/* Desktop CTA */}
-        <div className="hidden lg:flex items-center gap-4">
-          <Link
-            to="/admin"
-            className="text-textDark font-semibold hover:text-primary transition-colors text-sm underline underline-offset-4 decoration-2 decoration-transparent hover:decoration-primary"
-          >
-            Admin Portal
-          </Link>
+        <div className="hidden lg:block">
           <Link
             to="/report"
             className="inline-block bg-accent hover:bg-red-600 text-white px-6 py-2 rounded-full font-semibold transition-all shadow-sm hover:shadow-md transform hover:-translate-y-0.5 active:translate-y-0 text-sm"
