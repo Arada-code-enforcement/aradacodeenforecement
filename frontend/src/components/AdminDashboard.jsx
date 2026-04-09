@@ -126,6 +126,57 @@ const AdminDashboard = () => {
     }
   };
 
+  // --- CSV EXPORT HANDLER ---
+  const downloadCSV = (data, filename) => {
+    if (!data || data.length === 0) {
+      alert("No data available to download.");
+      return;
+    }
+
+    // Define headers and map data
+    let headers = [];
+    let rows = [];
+
+    if (activeTab === 'reports') {
+      headers = ["Date", "Reporter", "Wereda", "Type", "Rule", "Amount (ETB)", "Status", "Description"];
+      rows = data.map(item => [
+        item.timestampDisplay,
+        item.reporterName || 'Anonymous',
+        `Wereda ${item.violationWereda?.toString().padStart(2, '0')}`,
+        item.violationType,
+        item.violationRule,
+        item.penaltyAmount,
+        item.dailyStatus,
+        `"${(item.violationDescription || '').replace(/"/g, '""')}"`
+      ]);
+    } else {
+      headers = ["Date", "Name", "Phone", "Wereda", "Topic", "Message"];
+      rows = data.map(item => [
+        item.timestampDisplay,
+        item.name || 'Anonymous',
+        item.phone,
+        item.wereda === 'all' ? 'General' : `Wereda ${item.wereda?.toString().padStart(2, '0')}`,
+        item.topic,
+        `"${(item.message || '').replace(/"/g, '""')}"`
+      ]);
+    }
+
+    const csvContent = [
+      headers.join(","),
+      ...rows.map(r => r.join(","))
+    ].join("\n");
+
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.setAttribute("href", url);
+    link.setAttribute("download", `${filename}_${new Date().toISOString().split('T')[0]}.csv`);
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   if (loading) {
     return <div className="text-center py-24 text-textLight">Loading secure data...</div>;
   }
@@ -196,8 +247,14 @@ const AdminDashboard = () => {
         {/* REPORTS TABLE */}
         {activeTab === 'reports' && (
           <>
-            <div className="flex justify-between items-end mb-6 pb-2 border-b-2 border-primary/20">
+            <div className="flex justify-between items-center mb-6 pb-2 border-b-2 border-primary/20">
               <h3 className="text-2xl font-bold text-textDark">Submitted Reports</h3>
+              <button 
+                onClick={() => downloadCSV(submittedReports, "Finance_Reports")}
+                className="flex items-center gap-2 bg-primary/10 text-primary hover:bg-primary hover:text-white px-4 py-2 rounded-lg font-bold transition-all text-sm"
+              >
+                <span>📥 Download Excel (CSV)</span>
+              </button>
             </div>
             <table className="w-full text-left border-collapse min-w-[1000px]">
               <thead>
@@ -245,8 +302,14 @@ const AdminDashboard = () => {
         {/* COMPLIMENTS TABLE */}
         {activeTab === 'compliments' && (
           <>
-            <div className="flex justify-between items-end mb-6 pb-2 border-b-2 border-[#27ae60]/20">
+            <div className="flex justify-between items-center mb-6 pb-2 border-b-2 border-[#27ae60]/20">
               <h3 className="text-2xl font-bold text-textDark">Submitted Compliments</h3>
+              <button 
+                onClick={() => downloadCSV(submittedCompliments, "Compliments")}
+                className="flex items-center gap-2 bg-[#27ae60]/10 text-[#27ae60] hover:bg-[#27ae60] hover:text-white px-4 py-2 rounded-lg font-bold transition-all text-sm"
+              >
+                <span>📥 Download Excel (CSV)</span>
+              </button>
             </div>
             <table className="w-full text-left border-collapse min-w-[800px]">
               <thead>
