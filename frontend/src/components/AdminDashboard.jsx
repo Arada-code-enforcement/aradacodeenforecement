@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { db, auth } from '../firebase';
 import { collection, getDocs, query, orderBy, doc, deleteDoc, updateDoc } from 'firebase/firestore';
 import { signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth';
+import html2pdf from 'html2pdf.js';
 
 const AdminDashboard = () => {
   const [user, setUser] = useState(null);
@@ -177,6 +178,22 @@ const AdminDashboard = () => {
     document.body.removeChild(link);
   };
 
+  // --- PDF EXPORT HANDLER ---
+  const downloadPDF = (elementId, filename) => {
+    const element = document.getElementById(elementId);
+    if (!element) return;
+
+    const opt = {
+      margin: [0.5, 0.5],
+      filename: `${filename}_${new Date().toISOString().split('T')[0]}.pdf`,
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2, useCORS: true, letterRendering: true },
+      jsPDF: { unit: 'in', format: 'letter', orientation: 'landscape' }
+    };
+
+    html2pdf().set(opt).from(element).save();
+  };
+
   if (loading) {
     return <div className="text-center py-24 text-textLight">Loading secure data...</div>;
   }
@@ -249,14 +266,23 @@ const AdminDashboard = () => {
           <>
             <div className="flex justify-between items-center mb-6 pb-2 border-b-2 border-primary/20">
               <h3 className="text-2xl font-bold text-textDark">Submitted Reports</h3>
-              <button 
-                onClick={() => downloadCSV(submittedReports, "Finance_Reports")}
-                className="flex items-center gap-2 bg-primary/10 text-primary hover:bg-primary hover:text-white px-4 py-2 rounded-lg font-bold transition-all text-sm"
-              >
-                <span>📥 Download Excel (CSV)</span>
-              </button>
+              <div className="flex gap-2">
+                <button 
+                  onClick={() => downloadCSV(submittedReports, "Finance_Reports")}
+                  className="flex items-center gap-2 bg-primary/10 text-primary hover:bg-primary hover:text-white px-4 py-2 rounded-lg font-bold transition-all text-sm"
+                >
+                  <span>📥 Download Excel</span>
+                </button>
+                <button 
+                  onClick={() => downloadPDF("reports-table", "Finance_Reports")}
+                  className="flex items-center gap-2 bg-gray-100 text-gray-700 hover:bg-gray-200 px-4 py-2 rounded-lg font-bold transition-all text-sm border border-gray-200"
+                >
+                  <span>📄 Download PDF</span>
+                </button>
+              </div>
             </div>
-            <table className="w-full text-left border-collapse min-w-[1000px]">
+            <div id="reports-table" className="p-4 bg-white rounded-xl border border-gray-50">
+              <table className="w-full text-left border-collapse min-w-[1000px]">
               <thead>
                 <tr className="bg-bgLight text-textDark uppercase text-[10px] sm:text-xs font-bold tracking-wider">
                   <th className="p-3 sm:p-4 border-b">Date</th>
@@ -295,6 +321,7 @@ const AdminDashboard = () => {
                 ))}
               </tbody>
             </table>
+            </div>
             {submittedReports.length === 0 && <div className="text-center py-12 text-gray-400">No finance reports have been submitted yet.</div>}
           </>
         )}
@@ -304,14 +331,23 @@ const AdminDashboard = () => {
           <>
             <div className="flex justify-between items-center mb-6 pb-2 border-b-2 border-[#27ae60]/20">
               <h3 className="text-2xl font-bold text-textDark">Submitted Compliments</h3>
-              <button 
-                onClick={() => downloadCSV(submittedCompliments, "Compliments")}
-                className="flex items-center gap-2 bg-[#27ae60]/10 text-[#27ae60] hover:bg-[#27ae60] hover:text-white px-4 py-2 rounded-lg font-bold transition-all text-sm"
-              >
-                <span>📥 Download Excel (CSV)</span>
-              </button>
+              <div className="flex gap-2">
+                <button 
+                  onClick={() => downloadCSV(submittedCompliments, "Compliments")}
+                  className="flex items-center gap-2 bg-[#27ae60]/10 text-[#27ae60] hover:bg-[#27ae60] hover:text-white px-4 py-2 rounded-lg font-bold transition-all text-sm"
+                >
+                  <span>📥 Download Excel</span>
+                </button>
+                <button 
+                  onClick={() => downloadPDF("compliments-table", "Compliments")}
+                  className="flex items-center gap-2 bg-gray-100 text-gray-700 hover:bg-gray-200 px-4 py-2 rounded-lg font-bold transition-all text-sm border border-gray-200"
+                >
+                  <span>📄 Download PDF</span>
+                </button>
+              </div>
             </div>
-            <table className="w-full text-left border-collapse min-w-[800px]">
+            <div id="compliments-table" className="p-4 bg-white rounded-xl border border-gray-50">
+              <table className="w-full text-left border-collapse min-w-[800px]">
               <thead>
                 <tr className="bg-bgLight text-textDark uppercase text-xs font-bold tracking-wider">
                   <th className="p-4 border-b">Date</th>
@@ -340,6 +376,7 @@ const AdminDashboard = () => {
                 ))}
               </tbody>
             </table>
+            </div>
             {submittedCompliments.length === 0 && <div className="text-center py-12 text-gray-400">No compliments have been submitted yet.</div>}
           </>
         )}
