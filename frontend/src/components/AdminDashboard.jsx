@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { db, auth } from '../firebase';
-import { collection, getDocs, query, orderBy } from 'firebase/firestore';
+import { collection, getDocs, query, orderBy, doc, deleteDoc, updateDoc } from 'firebase/firestore';
 import { signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth';
 
 const AdminDashboard = () => {
@@ -8,12 +8,14 @@ const AdminDashboard = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   
-  // Tab State
   const [activeTab, setActiveTab] = useState('reports');
-  
   const [submittedReports, setSubmittedReports] = useState([]);
   const [submittedCompliments, setSubmittedCompliments] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  // Edit Modal States
+  const [editingReport, setEditingReport] = useState(null);
+  const [editingCompliment, setEditingCompliment] = useState(null);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -30,7 +32,6 @@ const AdminDashboard = () => {
   const fetchAllData = async () => {
     setLoading(true);
     try {
-      // 1. Fetch Reports
       const qReports = query(collection(db, "reports"), orderBy("timestamp", "desc"));
       const snapReports = await getDocs(qReports);
       const reportsData = [];
@@ -40,7 +41,6 @@ const AdminDashboard = () => {
       });
       setSubmittedReports(reportsData);
 
-      // 2. Fetch Compliments
       const qCompliments = query(collection(db, "compliments"), orderBy("timestamp", "desc"));
       const snapCompliments = await getDocs(qCompliments);
       const complimentsData = [];
@@ -49,10 +49,8 @@ const AdminDashboard = () => {
         complimentsData.push({ id: docSnap.id, ...raw, timestampDisplay: new Date(raw.timestamp).toLocaleString() });
       });
       setSubmittedCompliments(complimentsData);
-
     } catch (error) {
       console.error("Error fetching data: ", error);
-      // Fails quietly if compliments collection doesn't exist yet or rules are blocked.
     }
     setLoading(false);
   };
@@ -70,6 +68,62 @@ const AdminDashboard = () => {
     await signOut(auth);
     setSubmittedReports([]);
     setSubmittedCompliments([]);
+  };
+
+  // --- DELETE HANDLERS ---
+  const handleDeleteReport = async (id) => {
+    if (window.confirm("Are you sure you want to permanently delete this report?")) {
+      try {
+        await deleteDoc(doc(db, "reports", id));
+        fetchAllData();
+      } catch (err) {
+        alert("Error deleting report. Make sure your Firebase Security Rules allow deletion!");
+      }
+    }
+  };
+
+  const handleDeleteCompliment = async (id) => {
+    if (window.confirm("Are you sure you want to permanently delete this compliment?")) {
+      try {
+        await deleteDoc(doc(db, "compliments", id));
+        fetchAllData();
+      } catch (err) {
+        alert("Error deleting compliment. Make sure your Firebase Security Rules allow deletion!");
+      }
+    }
+  };
+
+  // --- UPDATE HANDLERS ---
+  const handleUpdateReport = async (e) => {
+    e.preventDefault();
+    try {
+      const docRef = doc(db, "reports", editingReport.id);
+      const dataToSave = { ...editingReport };
+      delete dataToSave.id;
+      delete dataToSave.timestampDisplay;
+      
+      await updateDoc(docRef, dataToSave);
+      setEditingReport(null);
+      fetchAllData();
+    } catch (err) {
+      alert("Error updating report. Make sure your Firebase Security Rules allow updates!");
+    }
+  };
+
+  const handleUpdateCompliment = async (e) => {
+    e.preventDefault();
+    try {
+      const docRef = doc(db, "compliments", editingCompliment.id);
+      const dataToSave = { ...editingCompliment };
+      delete dataToSave.id;
+      delete dataToSave.timestampDisplay;
+      
+      await updateDoc(docRef, dataToSave);
+      setEditingCompliment(null);
+      fetchAllData();
+    } catch (err) {
+      alert("Error updating compliment. Make sure your Firebase Security Rules allow updates!");
+    }
   };
 
   if (loading) {
@@ -99,7 +153,7 @@ const AdminDashboard = () => {
   }
 
   return (
-    <div className="max-w-7xl mx-auto">
+    <div className="max-w-[1400px] mx-auto">
       <div className="flex justify-between items-center mb-8 bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
         <div>
           <h2 className="text-3xl font-bold text-primary">Admin Dashboard</h2>
@@ -137,7 +191,7 @@ const AdminDashboard = () => {
         </button>
       </div>
 
-      <section className="bg-white p-8 rounded-2xl shadow-md border border-gray-100 mb-16 overflow-hidden animate-fade-in">
+      <section className="bg-white p-8 rounded-2xl shadow-md border border-gray-100 mb-16 overflow-x-auto min-h-[500px]">
         
         {/* REPORTS TABLE */}
         {activeTab === 'reports' && (
@@ -145,47 +199,46 @@ const AdminDashboard = () => {
             <div className="flex justify-between items-end mb-6 pb-2 border-b-2 border-primary/20">
               <h3 className="text-2xl font-bold text-textDark">Submitted Reports</h3>
             </div>
-            <div className="overflow-x-auto">
-              <table className="w-full text-left border-collapse">
-                <thead>
-                  <tr className="bg-bgLight text-textDark uppercase text-xs font-bold tracking-wider">
-                    <th className="p-4 border-b">Date</th>
-                    <th className="p-4 border-b">Reporter</th>
-                    <th className="p-4 border-b">Wereda</th>
-                    <th className="p-4 border-b">Type</th>
-                    <th className="p-4 border-b">Rule</th>
-                    <th className="p-4 border-b">Amount</th>
-                    <th className="p-4 border-b">Status</th>
-                    <th className="p-4 border-b">Details</th>
+            <table className="w-full text-left border-collapse min-w-[1000px]">
+              <thead>
+                <tr className="bg-bgLight text-textDark uppercase text-[10px] sm:text-xs font-bold tracking-wider">
+                  <th className="p-3 sm:p-4 border-b">Date</th>
+                  <th className="p-3 sm:p-4 border-b">Reporter</th>
+                  <th className="p-3 sm:p-4 border-b">Wereda</th>
+                  <th className="p-3 sm:p-4 border-b">Type</th>
+                  <th className="p-3 sm:p-4 border-b">Rule</th>
+                  <th className="p-3 sm:p-4 border-b">Amount</th>
+                  <th className="p-3 sm:p-4 border-b">Status</th>
+                  <th className="p-3 sm:p-4 border-b">Details</th>
+                  <th className="p-3 sm:p-4 border-b text-center">Actions</th>
+                </tr>
+              </thead>
+              <tbody className="text-sm">
+                {submittedReports.map((report) => (
+                  <tr key={report.id} className="hover:bg-gray-50 transition-colors border-b border-gray-50">
+                    <td className="p-3 sm:p-4 text-xs">{report.timestampDisplay}</td>
+                    <td className="p-3 sm:p-4 font-medium">{report.reporterName || 'Anonymous'}</td>
+                    <td className="p-3 sm:p-4">ወረዳ {report.violationWereda?.toString().padStart(2, '0')}</td>
+                    <td className="p-3 sm:p-4 text-xs" title={report.violationType}>{report.violationType}</td>
+                    <td className="p-3 sm:p-4 text-xs">{report.violationRule}</td>
+                    <td className="p-3 sm:p-4 font-mono font-bold text-primary whitespace-nowrap">{report.penaltyAmount} ETB</td>
+                    <td className="p-3 sm:p-4">
+                      <span className={`px-2 py-1 rounded-full text-[10px] font-bold uppercase ${report.dailyStatus === 'paid' ? 'bg-green-100 text-green-700' :
+                        report.dailyStatus === 'unpaid' ? 'bg-red-100 text-red-700' : 'bg-gray-100 text-gray-700'
+                        }`}>
+                        {report.dailyStatus}
+                      </span>
+                    </td>
+                    <td className="p-3 sm:p-4 text-xs italic text-textLight">{report.violationDescription?.substring(0,30)}...</td>
+                    <td className="p-3 sm:p-4 flex gap-2 justify-center">
+                      <button onClick={() => setEditingReport(report)} className="bg-blue-100 hover:bg-blue-200 text-blue-700 px-3 py-1.5 rounded-lg text-xs font-bold transition-colors">Edit</button>
+                      <button onClick={() => handleDeleteReport(report.id)} className="bg-red-100 hover:bg-red-200 text-red-700 px-3 py-1.5 rounded-lg text-xs font-bold transition-colors">Delete</button>
+                    </td>
                   </tr>
-                </thead>
-                <tbody className="text-sm">
-                  {submittedReports.map((report) => (
-                    <tr key={report.id} className="hover:bg-gray-50 transition-colors border-b border-gray-50">
-                      <td className="p-4 text-xs whitespace-nowrap">{report.timestampDisplay}</td>
-                      <td className="p-4 font-medium">{report.reporterName || 'Anonymous'}</td>
-                      <td className="p-4">ወረዳ {report.violationWereda?.toString().padStart(2, '0')}</td>
-                      <td className="p-4 truncate max-w-[150px]" title={report.violationType}>{report.violationType}</td>
-                      <td className="p-4">{report.violationRule}</td>
-                      <td className="p-4 font-mono font-bold text-primary">{report.penaltyAmount} ETB</td>
-                      <td className="p-4">
-                        <span className={`px-2 py-1 rounded-full text-[10px] font-bold uppercase ${report.dailyStatus === 'paid' ? 'bg-green-100 text-green-700' :
-                          report.dailyStatus === 'unpaid' ? 'bg-red-100 text-red-700' : 'bg-gray-100 text-gray-700'
-                          }`}>
-                          {report.dailyStatus}
-                        </span>
-                      </td>
-                      <td className="p-4 text-xs italic text-textLight">{report.violationDescription}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-              {submittedReports.length === 0 && (
-                <div className="text-center py-12 text-gray-400">
-                  <p>No finance reports have been submitted yet.</p>
-                </div>
-              )}
-            </div>
+                ))}
+              </tbody>
+            </table>
+            {submittedReports.length === 0 && <div className="text-center py-12 text-gray-400">No finance reports have been submitted yet.</div>}
           </>
         )}
 
@@ -195,41 +248,127 @@ const AdminDashboard = () => {
             <div className="flex justify-between items-end mb-6 pb-2 border-b-2 border-[#27ae60]/20">
               <h3 className="text-2xl font-bold text-textDark">Submitted Compliments</h3>
             </div>
-            <div className="overflow-x-auto">
-              <table className="w-full text-left border-collapse">
-                <thead>
-                  <tr className="bg-bgLight text-textDark uppercase text-xs font-bold tracking-wider">
-                    <th className="p-4 border-b">Date</th>
-                    <th className="p-4 border-b">Name</th>
-                    <th className="p-4 border-b">Phone</th>
-                    <th className="p-4 border-b">Wereda</th>
-                    <th className="p-4 border-b">Topic</th>
-                    <th className="p-4 border-b">Message</th>
+            <table className="w-full text-left border-collapse min-w-[800px]">
+              <thead>
+                <tr className="bg-bgLight text-textDark uppercase text-xs font-bold tracking-wider">
+                  <th className="p-4 border-b">Date</th>
+                  <th className="p-4 border-b">Name</th>
+                  <th className="p-4 border-b">Phone</th>
+                  <th className="p-4 border-b">Wereda</th>
+                  <th className="p-4 border-b">Topic</th>
+                  <th className="p-4 border-b">Message</th>
+                  <th className="p-4 border-b text-center">Actions</th>
+                </tr>
+              </thead>
+              <tbody className="text-sm">
+                {submittedCompliments.map((comp) => (
+                  <tr key={comp.id} className="hover:bg-gray-50 transition-colors border-b border-gray-50">
+                    <td className="p-4 text-xs">{comp.timestampDisplay}</td>
+                    <td className="p-4 font-medium">{comp.name || 'Anonymous'}</td>
+                    <td className="p-4 font-mono">{comp.phone}</td>
+                    <td className="p-4">{comp.wereda === 'all' ? 'General' : `ወረዳ ${comp.wereda?.toString().padStart(2, '0')}`}</td>
+                    <td className="p-4 font-semibold text-[#27ae60]">{comp.topic}</td>
+                    <td className="p-4 text-xs italic text-textLight">{comp.message?.substring(0,40)}...</td>
+                    <td className="p-4 flex gap-2 justify-center">
+                      <button onClick={() => setEditingCompliment(comp)} className="bg-blue-100 hover:bg-blue-200 text-blue-700 px-3 py-1.5 rounded-lg text-xs font-bold transition-colors">Edit</button>
+                      <button onClick={() => handleDeleteCompliment(comp.id)} className="bg-red-100 hover:bg-red-200 text-red-700 px-3 py-1.5 rounded-lg text-xs font-bold transition-colors">Delete</button>
+                    </td>
                   </tr>
-                </thead>
-                <tbody className="text-sm">
-                  {submittedCompliments.map((comp) => (
-                    <tr key={comp.id} className="hover:bg-gray-50 transition-colors border-b border-gray-50">
-                      <td className="p-4 text-xs whitespace-nowrap">{comp.timestampDisplay}</td>
-                      <td className="p-4 font-medium">{comp.name || 'Anonymous'}</td>
-                      <td className="p-4 font-mono">{comp.phone}</td>
-                      <td className="p-4">{comp.wereda === 'all' ? 'General' : `ወረዳ ${comp.wereda?.toString().padStart(2, '0')}`}</td>
-                      <td className="p-4 font-semibold text-[#27ae60]">{comp.topic}</td>
-                      <td className="p-4 text-xs italic text-textLight max-w-xs">{comp.message}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-              {submittedCompliments.length === 0 && (
-                <div className="text-center py-12 text-gray-400">
-                  <p>No compliments have been submitted yet.</p>
-                </div>
-              )}
-            </div>
+                ))}
+              </tbody>
+            </table>
+            {submittedCompliments.length === 0 && <div className="text-center py-12 text-gray-400">No compliments have been submitted yet.</div>}
           </>
         )}
 
       </section>
+
+      {/* --- REPORT EDIT MODAL --- */}
+      {editingReport && (
+        <div className="fixed inset-0 bg-black/50 z-[100] flex items-center justify-center p-4 backdrop-blur-sm shadow-2xl">
+          <div className="bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto p-8 relative">
+            <button onClick={() => setEditingReport(null)} className="absolute top-4 right-6 text-3xl text-gray-400 hover:text-gray-700">&times;</button>
+            <h2 className="text-2xl font-bold mb-6 text-primary border-b pb-2">Edit Report Record</h2>
+            <form onSubmit={handleUpdateReport} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-semibold mb-1">Reporter Name</label>
+                <input type="text" value={editingReport.reporterName || ''} onChange={(e)=>setEditingReport({...editingReport, reporterName: e.target.value})} className="w-full p-2 border rounded-lg" />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold mb-1">Wereda</label>
+                <select value={editingReport.violationWereda || ''} onChange={(e)=>setEditingReport({...editingReport, violationWereda: e.target.value})} className="w-full p-2 border rounded-lg">
+                  <option value="">Select Wereda</option>
+                  {[1,2,4,5,6,7,8,9].map(w => <option key={w} value={w}>ወረዳ 0{w}</option>)}
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-semibold mb-1">Violation Type</label>
+                <input type="text" value={editingReport.violationType || ''} onChange={(e)=>setEditingReport({...editingReport, violationType: e.target.value})} className="w-full p-2 border rounded-lg" />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold mb-1">Rule</label>
+                <input type="text" value={editingReport.violationRule || ''} onChange={(e)=>setEditingReport({...editingReport, violationRule: e.target.value})} className="w-full p-2 border rounded-lg" />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold mb-1">Penalty Amount</label>
+                <input type="number" value={editingReport.penaltyAmount || ''} onChange={(e)=>setEditingReport({...editingReport, penaltyAmount: e.target.value})} className="w-full p-2 border rounded-lg" />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold mb-1">Status</label>
+                <select value={editingReport.dailyStatus || ''} onChange={(e)=>setEditingReport({...editingReport, dailyStatus: e.target.value})} className="w-full p-2 border rounded-lg">
+                   <option value="paid">Paid</option>
+                   <option value="unpaid">Unpaid</option>
+                   <option value="none">None</option>
+                </select>
+              </div>
+              <div className="md:col-span-2">
+                <label className="block text-sm font-semibold mb-1">Description</label>
+                <textarea value={editingReport.violationDescription || ''} onChange={(e)=>setEditingReport({...editingReport, violationDescription: e.target.value})} className="w-full p-2 border rounded-lg h-24"></textarea>
+              </div>
+              <div className="md:col-span-2 flex justify-end gap-3 mt-4">
+                <button type="button" onClick={() => setEditingReport(null)} className="px-6 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg font-bold">Cancel</button>
+                <button type="submit" className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-bold">Save Changes</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* --- COMPLIMENT EDIT MODAL --- */}
+      {editingCompliment && (
+        <div className="fixed inset-0 bg-black/50 z-[100] flex items-center justify-center p-4 backdrop-blur-sm shadow-2xl">
+          <div className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-8 relative">
+            <button onClick={() => setEditingCompliment(null)} className="absolute top-4 right-6 text-3xl text-gray-400 hover:text-gray-700">&times;</button>
+            <h2 className="text-2xl font-bold mb-6 text-[#27ae60] border-b pb-2">Edit Compliment Record</h2>
+            <form onSubmit={handleUpdateCompliment} className="flex flex-col gap-4">
+              <div>
+                <label className="block text-sm font-semibold mb-1">Name</label>
+                <input type="text" value={editingCompliment.name || ''} onChange={(e)=>setEditingCompliment({...editingCompliment, name: e.target.value})} className="w-full p-2 border rounded-lg" />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold mb-1">Phone</label>
+                <input type="text" value={editingCompliment.phone || ''} onChange={(e)=>setEditingCompliment({...editingCompliment, phone: e.target.value})} className="w-full p-2 border rounded-lg" />
+              </div>
+              <div>
+                <label className="block text-sm font-semibold mb-1">Wereda</label>
+                <select value={editingCompliment.wereda || ''} onChange={(e)=>setEditingCompliment({...editingCompliment, wereda: e.target.value})} className="w-full p-2 border rounded-lg">
+                  <option value="all">Sub-City General</option>
+                  {[1,2,4,5,6,7,8,9].map(w => <option key={w} value={w}>ወረዳ 0{w}</option>)}
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm font-semibold mb-1">Message</label>
+                <textarea value={editingCompliment.message || ''} onChange={(e)=>setEditingCompliment({...editingCompliment, message: e.target.value})} className="w-full p-2 border rounded-lg h-32"></textarea>
+              </div>
+              <div className="flex justify-end gap-3 mt-4">
+                <button type="button" onClick={() => setEditingCompliment(null)} className="px-6 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg font-bold">Cancel</button>
+                <button type="submit" className="px-6 py-2 bg-[#27ae60] hover:bg-[#219653] text-white rounded-lg font-bold">Save Changes</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 };
