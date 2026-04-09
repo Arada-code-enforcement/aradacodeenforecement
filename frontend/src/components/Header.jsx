@@ -7,9 +7,9 @@ const Header = () => {
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-r from-primary/95 to-darkFooter/90 z-10 mix-blend-multiply"></div>
-        <img 
-          src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80" 
-          alt="City skyline" 
+        <img
+          src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80"
+          alt="City skyline"
           className="w-full h-full object-cover object-center"
         />
       </div>
@@ -19,15 +19,11 @@ const Header = () => {
         <div className="inline-block bg-white/20 backdrop-blur-sm border border-white/30 text-white px-4 py-1.5 rounded-full text-sm font-medium tracking-wide mb-6 animate-fade-in-up">
           Arada Sub-City Administration
         </div>
-        
+
         <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 tracking-tight drop-shadow-lg leading-tight">
           Code Enforcement <span className="text-greenTint opacity-90">Office</span>
         </h1>
-        
-        <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto font-light leading-relaxed mb-10">
-          Ensuring Safe and Clean Communities. We are dedicated to maintaining the health, safety, and cleanliness of our community by enforcing local codes.
-        </p>
-        
+
         <div className="flex flex-wrap justify-center gap-4">
           <Link to="/report" className="bg-white text-primary px-8 py-3.5 rounded-full font-semibold shadow-lg hover:bg-gray-50 hover:shadow-xl transition-all transform hover:-translate-y-1">
             File a Report
@@ -37,7 +33,7 @@ const Header = () => {
           </a>
         </div>
       </div>
-      
+
       {/* Decorative Bottom shape */}
       <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-20">
         <svg className="relative block w-full h-[50px] md:h-[80px]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">

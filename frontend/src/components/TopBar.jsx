@@ -16,11 +16,11 @@ const TopBar = () => {
             <a href="mailto:info@arada-enforcement.com" className="hover:text-white transition-all underline decoration-primary/30 underline-offset-4">info@arada-enforcement.com</a>
           </div>
         </div>
-        
+
         <div className="hidden md:flex items-center gap-2 opacity-90 group">
           <span className="text-primary-light group-hover:rotate-12 transition-transform">📅</span>
           <span className="text-gray-500 font-bold uppercase text-[9px]">Working Hours:</span>
-          <span className="text-gray-300">Mon - Fri (8:00 AM - 5:30 PM)</span>
+          <span className="text-gray-300">Mon -Sun (8:00 AM - 5:30 PM)</span>
         </div>
       </div>
     </div>
