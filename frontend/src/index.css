@@ -76,4 +76,40 @@ html {
       transform: translateX(-33.33%);
     }
   }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+  }
+
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 10px rgba(26, 93, 58, 0.2); }
+    50% { box-shadow: 0 0 20px rgba(26, 93, 58, 0.4); }
+  }
+
+  .animate-float {
+    animation: float 4s ease-in-out infinite;
+  }
+
+  .text-dynamic-gradient {
+    background: linear-gradient(90deg, var(--color-primary), var(--color-primary-light), var(--color-primary));
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 4s linear infinite;
+  }
+
+  .logo-dynamic-shield {
+    @apply transition-all duration-500 ease-out;
+  }
+
+  .group:hover .logo-dynamic-shield {
+    @apply scale-110 rotate-3;
+    filter: drop-shadow(0 0 12px rgba(26, 93, 58, 0.3));
+  }
 }

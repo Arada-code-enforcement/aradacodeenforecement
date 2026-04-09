@@ -39,15 +39,17 @@ const Navbar = () => {
       <div className="max-w-[1200px] mx-auto px-5 flex justify-between items-center">
 
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-4 hover:opacity-80 transition-opacity flex-shrink-0">
-          <img
-            src={aradaLogo}
-            alt="Arada Code Enforcement Logo"
-            className="w-14 h-14 object-contain rounded-full shadow-sm"
-          />
-          <div>
-            <div className="font-bold text-primary tracking-tight leading-tight text-lg">Arada</div>
-            <div className="text-xs text-textLight tracking-wide font-medium uppercase">Code Enforcement</div>
+        <Link to="/" className="flex items-center gap-4 group flex-shrink-0 transition-transform duration-300 active:scale-95">
+          <div className="relative">
+            <img
+              src={aradaLogo}
+              alt="Arada Code Enforcement Logo"
+              className="w-14 h-14 object-contain rounded-full shadow-sm animate-float logo-dynamic-shield"
+            />
+          </div>
+          <div className="flex flex-col">
+            <div className="font-extrabold tracking-tighter leading-none text-2xl text-dynamic-gradient">Arada</div>
+            <div className="text-[10px] text-textLight tracking-[0.2em] font-black uppercase group-hover:text-primary transition-colors duration-500 mt-0.5">Code Enforcement</div>
           </div>
         </Link>
 

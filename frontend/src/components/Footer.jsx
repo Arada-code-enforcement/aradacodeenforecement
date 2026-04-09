@@ -12,15 +12,20 @@ const Footer = () => {
 
           {/* Brand Column */}
           <div className="lg:col-span-2">
-            <div className="flex items-center gap-4 mb-6">
-              <img
-                src={aradaLogo}
-                alt="Arada Code Enforcement Logo"
-                className="w-24 h-24 object-contain rounded-full bg-white p-1.5 shadow-sm"
-              />
+            <div className="flex items-center gap-6 mb-8 group">
+              <div className="relative">
+                <img
+                  src={aradaLogo}
+                  alt="Arada Code Enforcement Logo"
+                  className="w-24 h-24 object-contain rounded-full bg-white p-1.5 shadow-xl animate-float logo-dynamic-shield"
+                />
+              </div>
               <div>
-                <h2 className="text-white text-2xl font-bold tracking-tight leading-tight m-0">Arada Code Enforcement</h2>
-                <p className="text-[#bdc3c7] text-sm font-medium tracking-wide">Serving the community.</p>
+                <h2 className="text-white text-3xl font-extrabold tracking-tighter leading-none mb-1">
+                  <span className="text-dynamic-gradient">Arada</span>
+                  <span className="block text-lg tracking-widest uppercase font-black text-gray-400 group-hover:text-primary transition-colors duration-500 mt-2">Code Enforcement</span>
+                </h2>
+                <p className="text-[#bdc3c7] text-sm font-medium tracking-widest uppercase opacity-70">Serving the community.</p>
               </div>
             </div>
             <p className="text-gray-400 leading-relaxed mb-6 max-w-md">
