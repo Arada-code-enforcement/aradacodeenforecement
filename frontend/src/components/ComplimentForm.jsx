@@ -1,9 +1,48 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { db } from '../firebase';
+import { collection, addDoc } from 'firebase/firestore';
+
 const ComplimentForm = () => {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert('Thank you for your compliment! We appreciate your feedback.');
+  const [formData, setFormData] = useState({
+    name: '',
+    phone: '',
+    wereda: '',
+    topic: '',
+    message: '',
+  });
+
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    const fieldMap = {
+      'comp-name': 'name',
+      'comp-phone': 'phone',
+      'comp-wereda': 'wereda',
+      'comp-topic': 'topic',
+      'comp-message': 'message'
+    };
+    if (fieldMap[id]) {
+      setFormData((prev) => ({ ...prev, [fieldMap[id]]: value }));
+    }
   };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const dataToSubmit = {
+        ...formData,
+        timestamp: new Date().toISOString()
+      };
+      
+      await addDoc(collection(db, "compliments"), dataToSubmit);
+      
+      alert('Thank you for your compliment! We appreciate your feedback. (አድናቆትዎ በትክክል ተልኳል)');
+      setFormData({ name: '', phone: '', wereda: '', topic: '', message: '' });
+    } catch (error) {
+      console.error("Error saving compliment: ", error);
+      alert("Error submitting compliment. Please check your connection.");
+    }
+  };
+
   return (
     <section id="compliment" className="bg-white p-12 rounded-md shadow-sm max-w-[800px] mx-auto mb-16 border-t-[5px] border-[#27ae60]">
       <div className="flex justify-center mb-4 text-5xl">🌟</div>
@@ -16,16 +55,25 @@ const ComplimentForm = () => {
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="form-group">
           <label htmlFor="comp-name" className="block font-semibold mb-2 text-textDark">👤ስም:(Optional)</label>
-          <input type="text" id="comp-name" placeholder="Alemu" className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-[#27ae60] focus:ring-2 focus:ring-[#27ae60]/10 transition-all font-sans" />
+          <input 
+            type="text" id="comp-name" placeholder="Alemu" 
+            value={formData.name} onChange={handleChange}
+            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-[#27ae60] focus:ring-2 focus:ring-[#27ae60]/10 transition-all font-sans" 
+          />
         </div>
 
         <div className="form-group">
           <label htmlFor="comp-phone" className="block font-semibold mb-2 text-textDark">📱Your Phone(ስልክ ቁጥር) </label>
-          <input type="tel" id="comp-phone" placeholder="+251" className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-[#27ae60] focus:ring-2 focus:ring-[#27ae60]/10 transition-all font-sans" />
+          <input 
+            type="tel" id="comp-phone" placeholder="+251..." 
+            required value={formData.phone} onChange={handleChange}
+            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-[#27ae60] focus:ring-2 focus:ring-[#27ae60]/10 transition-all font-sans" 
+          />
         </div>
+
         <div className="form-group">
           <label htmlFor="comp-wereda" className="block font-semibold mb-2 text-textDark">Select Woreda ( ወረዳ )</label>
-          <select id="comp-wereda" name="comp-wereda" required className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-[#27ae60] focus:ring-2 focus:ring-[#27ae60]/10 transition-all font-sans bg-white">
+          <select id="comp-wereda" required value={formData.wereda} onChange={handleChange} className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-[#27ae60] focus:ring-2 focus:ring-[#27ae60]/10 transition-all font-sans bg-white">
             <option value="">ወረዳ-- </option>
             <option value="1">ወረዳ 01</option>
             <option value="2">ወረዳ 02</option>
@@ -38,9 +86,10 @@ const ComplimentForm = () => {
             <option value="all">Sub-City General (በአጠቃላይ)</option>
           </select>
         </div>
+
         <div className="form-group">
           <label htmlFor="comp-topic" className="block font-semibold mb-2 text-textDark">Compliment Topic (የአድናቆት ርዕስ)</label>
-          <select id="comp-topic" name="comp-topic" required className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-[#27ae60] focus:ring-2 focus:ring-[#27ae60]/10 transition-all font-sans bg-white">
+          <select id="comp-topic" required value={formData.topic} onChange={handleChange} className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-[#27ae60] focus:ring-2 focus:ring-[#27ae60]/10 transition-all font-sans bg-white">
             <option value="">-- Select Topic -- </option>
             <option value="officer">Excellent Service by an Officer (ጥሩ አገልግሎት)</option>
             <option value="cleanliness">Improved Area Cleanliness (የአካባቢ ጽዳት)</option>
@@ -51,7 +100,11 @@ const ComplimentForm = () => {
 
         <div className="form-group">
           <label htmlFor="comp-message" className="block font-semibold mb-2 text-textDark">Message (መልእክት)</label>
-          <textarea id="comp-message" placeholder="Share your positive feedback..." required className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-[#27ae60] focus:ring-2 focus:ring-[#27ae60]/10 transition-all font-sans min-h-[120px] resize-y"></textarea>
+          <textarea 
+            id="comp-message" placeholder="Share your positive feedback..." 
+            required value={formData.message} onChange={handleChange}
+            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-[#27ae60] focus:ring-2 focus:ring-[#27ae60]/10 transition-all font-sans min-h-[120px] resize-y"
+          ></textarea>
         </div>
 
         <div className="text-center">
