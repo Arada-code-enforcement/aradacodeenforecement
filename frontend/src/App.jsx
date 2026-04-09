@@ -14,6 +14,7 @@ import Hero from './components/Hero';
 import AnnouncementTicker from './components/AnnouncementTicker';
 import Footer from './components/Footer';
 import AdminDashboard from './components/AdminDashboard';
+import TopBar from './components/TopBar';
 
 // A simple Home wrapper component for the homepage content
 const Home = () => (
@@ -33,9 +34,10 @@ function App() {
   return (
     <div className="min-h-screen flex flex-col font-sans">
       <div className="fixed top-0 w-full z-[60]">
+        <TopBar />
         <AnnouncementTicker />
       </div>
-      <div className="mt-[42px]">
+      <div className="mt-[82px] transition-all duration-300">
         <Navbar />
       </div>
 
