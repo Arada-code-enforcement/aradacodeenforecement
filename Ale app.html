@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Arada Sub-City Code Enforcement</title>
-    <meta name="description" content="Official portal for Arada Sub-City Code Enforcement - Ensuring safe and clean communities.">
+    <meta name="description"
+        content="Official portal for Arada Sub-City Code Enforcement - Ensuring safe and clean communities.">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,6 +14,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
     <!-- Header Section -->
@@ -37,13 +40,14 @@
 
     <main id="welcome">
         <div class="container">
-            
+
             <!-- Intro Section -->
             <section class="intro-section">
                 <h2>💐እንኳን ደህና መጣችሁ አራዳ ክፍለ ከተማ አስተዳደር ደንብ ማስከበር ጽ/ቤት</h2>
-                <h1>Welcome to Arada Sub-City Code Enforcement Office </h1>    
+                <h1>Welcome to Arada Sub-City Code Enforcement Office </h1>
                 <div class="section-divider"></div>
-                <p>We are dedicated to maintaining the heah, safety, and cleanliness of our community by enforcing local codes and regulations. Together, we can build a better environment for everyone.</p>
+                <p>We are dedicated to maintaining the heah, safety, and cleanliness of our community by enforcing local
+                    codes and regulations. Together, we can build a better environment for everyone.</p>
             </section>
 
             <!-- Cards Section -->
@@ -52,18 +56,20 @@
                 <div class="card">
                     <div class="card-icon">🏦</div>
                     <h3> Finance Report </h3>
-                    <p>Report issues such as illegal dumping, unsafe buildings, or other community code violations anonymously.</p>
+                    <p>Report issues such as illegal dumping, unsafe buildings, or other community code violations
+                        anonymously.</p>
                     <a href="#report" class="btn">Submit a Report</a>
                 </div>
-                
+
                 <!-- Card 2 -->
                 <div class="card">
                     <div class="card-icon">📋</div>
                     <h3>About Code Enforcement Office</h3>
-                    <p> Learn about our mission, what we regulate, and how we help keep our sub-city safe and orderly.</p>
+                    <p> Learn about our mission, what we regulate, and how we help keep our sub-city safe and orderly.
+                    </p>
                     <a href="#about" class="btn">Learn More</a>
                 </div>
-                
+
                 <!-- Card 3 -->
                 <div class="card">
                     <div class="card-icon">✉️</div>
@@ -76,10 +82,12 @@
             <!-- Report Form Section -->
             <section id="report" class="form-section">
                 <h2 class="text-center">Finance Report form (የፋይናንስ ሪፖርት መላኪያ ቅፅ )</h2>
-                <p class="text-center">Please fill out the form below to report a code violation. Your report helps us act quickly.</p>
+                <p class="text-center">Please fill out the form below to report a code violation. Your report helps us
+                    act quickly.</p>
                 <br>
-                
-                <form action="#" method="POST" onsubmit="event.preventDefau(); alert('Thank you for your report. We will investigate shortly.');">
+
+                <form action="#" method="POST"
+                    onsubmit="event.preventDefau(); alert('Thank you for your report. We will investigate shortly.');">
                     <div class="form-group">
                         <label for="name">👤ስም:(Optional)</label>
                         <input type="text" id="Your Name" placeholder="Alemu">
@@ -94,85 +102,86 @@
                         <label for="location">Location of Violation</label>
                         <input type="text" id="location" placeholder="4kilo, near the Abro Library" required>
                     </div>
-          <div class="form-group">
-             <label for="violationType">የደንብ ጥሰት አይነት</label>
-             <select id="violationType" name="violationType" required>
-             <option value="">-- የደንብ ጥሰት አይነት-- </option>
-             <option value="zoning">በህገ ወጥ መሬት ወረራ </option>
-             <option value="zoning">በህገ ወጥ መሬት  ማስፋፋት </option>
-             <option value="illegal-dumping">በህገ ወጥ ግንባታ</option>
-             <option value="unsafe-building">በህገ ወጥ ደረቅና ፋሳሽ ቆሻሻ</option>
-             <option value="noise">በህገ ወጥ መንግድ አጠቃቀም </option>
-             <option value="sanitation">በህገ ወጥ  ማስታወቃያ </option>
-             <option value="zoning">በህገ ወጥ  ጎዳና ንግድ  </option>
-             <option value="zoning">በህገ ወጥ  የእንስሳት እርድ</option>
-             <option value="sanitation">በህገ ወጥ አዋኪ ድርጊት  </option>
-             <option value="zoning">በደንብ 180  </option>
-             <option value="zoning"> - </option>
-            <option value="other">Other</option> 
-          </select>
-          </div>
-          <div class="form-group">
-      <label for="wereda"> Select ( ወረዳ )
-      </label>
-      <select id="wereda" name=" wereda" required>
-        <option value="">ወረዳ-- </option>
-        <option value="1">ወረዳ 01</option>
-        <option value="2">ወረዳ 02</option>
-        <option value="4">ወረዳ 04</option>
-        <option value="5">ወረዳ 05</option>
-        <option value="6">ወረዳ 06</option>
-        <option value="7">ወረዳ 07</option>
-        <option value="8">ወረዳ 08</option> 
-        <option value="9">ወረዳ 09</option>
-         </select>
-          </div>
-          <div class="form-group">
-            <label for="violationType">Block (ቀጣና)</label>
-            <select id="violationType" name="violationType" required>  
-             <option value="">5</option>
-             <option value="">10</option>
-             <option value="">15</option>
-             <option value="">18</option>
-             <option value="">19</option>
-             <option value="">13</option>
-             <option value="illegal-dumping">14 </option>
-            <option value="sanitation">- </option>
-            <option value="other">Other</option>
-            </select>
-        </div>
-             <div class="form-group">
-             <label for="violationType">the amount of cash (በገዘብ የተቀጣ ብር መጠን)</label>
-             <select id="violationType" name="violationType" required>
-             <option value="">100ብር </option>
-             <option value="">500ብር </option>
-             <option value="">1000ብር </option>
-             <option value="">2000ብር </option>
-             <option value="">3000ብር </option>
-             <option value="">5000ብር </option>
-             <option value="">10,000ብር </option>
-             <option value="">20,000ብር </option>
-             <option value="">50,000ብር </option>
-             <option value="">100,000ብር </option>
-             <option value="">200,000ብር </option>
-             <option value="illegal-dumping">300,000ብር</option>
-             <option value="sanitation">400,000ብር </option>
-             <option value="other">1,000,000ብር </option>
-             <option value="">-</option>
-             </select>
-              </div>
                     <div class="form-group">
-          <label for="wereda"> በየቀኑ ቅጣትም ሆነ ስል ገቢ ሁኔታ በተመላከተ 
-           </label>
-      <select id="wereda" name=" wereda" required>
-        <option value="1">yes(አለ)</option>
-        <option value="2">በዛሬው ዕለት የተቀጣ ቅጣት የለም</option>
-        </select>
-          </div>
+                        <label for="violationType">የደንብ ጥሰት አይነት</label>
+                        <select id="violationType" name="violationType" required>
+                            <option value="">-- የደንብ ጥሰት አይነት-- </option>
+                            <option value="zoning">በህገ ወጥ መሬት ወረራ </option>
+                            <option value="zoning">በህገ ወጥ መሬት ማስፋፋት </option>
+                            <option value="illegal-dumping">በህገ ወጥ ግንባታ</option>
+                            <option value="unsafe-building">በህገ ወጥ ደረቅና ፋሳሽ ቆሻሻ</option>
+                            <option value="noise">በህገ ወጥ መንግድ አጠቃቀም </option>
+                            <option value="sanitation">በህገ ወጥ ማስታወቃያ </option>
+                            <option value="zoning">በህገ ወጥ ጎዳና ንግድ </option>
+                            <option value="zoning">በህገ ወጥ የእንስሳት እርድ</option>
+                            <option value="sanitation">በህገ ወጥ አዋኪ ድርጊት </option>
+                            <option value="zoning">በደንብ 180 </option>
+                            <option value="zoning"> - </option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="wereda"> Select ( ወረዳ )
+                        </label>
+                        <select id="wereda" name=" wereda" required>
+                            <option value="">ወረዳ-- </option>
+                            <option value="1">ወረዳ 01</option>
+                            <option value="2">ወረዳ 02</option>
+                            <option value="4">ወረዳ 04</option>
+                            <option value="5">ወረዳ 05</option>
+                            <option value="6">ወረዳ 06</option>
+                            <option value="7">ወረዳ 07</option>
+                            <option value="8">ወረዳ 08</option>
+                            <option value="9">ወረዳ 09</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="violationType">Block (ቀጣና)</label>
+                        <select id="violationType" name="violationType" required>
+                            <option value="">5</option>
+                            <option value="">10</option>
+                            <option value="">15</option>
+                            <option value="">18</option>
+                            <option value="">19</option>
+                            <option value="">13</option>
+                            <option value="illegal-dumping">14 </option>
+                            <option value="sanitation">- </option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="violationType">the amount of cash (በገዘብ የተቀጣ ብር መጠን)</label>
+                        <select id="violationType" name="violationType" required>
+                            <option value="">100ብር </option>
+                            <option value="">500ብር </option>
+                            <option value="">1000ብር </option>
+                            <option value="">2000ብር </option>
+                            <option value="">3000ብር </option>
+                            <option value="">5000ብር </option>
+                            <option value="">10,000ብር </option>
+                            <option value="">20,000ብር </option>
+                            <option value="">50,000ብር </option>
+                            <option value="">100,000ብር </option>
+                            <option value="">200,000ብር </option>
+                            <option value="illegal-dumping">300,000ብር</option>
+                            <option value="sanitation">400,000ብር </option>
+                            <option value="other">1,000,000ብር </option>
+                            <option value="">-</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="wereda"> በየቀኑ ቅጣትም ሆነ ስል ገቢ ሁኔታ በተመላከተ
+                        </label>
+                        <select id="wereda" name=" wereda" required>
+                            <option value="1">yes(አለ)</option>
+                            <option value="2">በዛሬው ዕለት የተቀጣ ቅጣት የለም</option>
+                        </select>
+                    </div>
                     <div class="form-group">
                         <label for="description">Description of Issue (ተጨማር አስተያየት ከአለ)
                         </label>
-                        <textarea id="description" placeholder="Describe the violation in detail..." required></textarea>
+                        <textarea id="description" placeholder="Describe the violation in detail..."
+                            required></textarea>
                     </div>
 
                     <div class="text-center">
@@ -185,38 +194,38 @@
             <section id="about" class="info-section">
                 <div class="info-col">
                     <h2>About Code Enforcement office </h2>
-                </p>
-                <h3>የአዲስ አበባ ከተማ አስተዳደር  ደንብ ማስከበር ባለስልጣን</h3>
-                   <h3> ራዕይ </h3> 
-                 </p> በ2022 ዓ.ም በአዲስ አበባ ከተማ የደንብ መተላለፍ የቀነሰባት ለነዋሪዎቿ ምቹ እንዲሁም ለአፍሪካ ከተሞች ተምሳሌት ሆና ማየት፡</p>
-                 <h3> ተልዕኮ </h3>
-                 </p>በህብረተሰቡ ሁሉን አቀፍ ተሳትፎ የደንብ መተላለፎችንና ተያያዥ ህገ-ወጥ ተግባራትን በመከላከል፣ 
-                 በመቆጣጠር እና እርምጃ በመውሰድ አዲስ አበባ ከተማን ለነዋሪዎቿ ምቹ፤ ማራኪና ሰላማዊ እንድትሆን ማድረግ፡፡ </p>    
-                 <h3>እሴቶች</h3>
-                 </p>ለህግ የበላይነት በጽናት መታገል፣
-                  ተጠያቂነት፣
-                  አሳታፊነት ከራስ በላይ የህዝብ ጥቅም ማስቀደም፣ 
-                  አገልጋይነት: 
-                  ታማኝነት፣
-                 ለጋራ ዓላማ መቆም::</p>
+                    </p>
+                    <h3>የአዲስ አበባ ከተማ አስተዳደር ደንብ ማስከበር ባለስልጣን</h3>
+                    <h3> ራዕይ </h3>
+                    </p> በ2022 ዓ.ም በአዲስ አበባ ከተማ የደንብ መተላለፍ የቀነሰባት ለነዋሪዎቿ ምቹ እንዲሁም ለአፍሪካ ከተሞች ተምሳሌት ሆና ማየት፡</p>
+                    <h3> ተልዕኮ </h3>
+                    </p>በህብረተሰቡ ሁሉን አቀፍ ተሳትፎ የደንብ መተላለፎችንና ተያያዥ ህገ-ወጥ ተግባራትን በመከላከል፣
+                    በመቆጣጠር እና እርምጃ በመውሰድ አዲስ አበባ ከተማን ለነዋሪዎቿ ምቹ፤ ማራኪና ሰላማዊ እንድትሆን ማድረግ፡፡ </p>
+                    <h3>እሴቶች</h3>
+                    </p>ለህግ የበላይነት በጽናት መታገል፣
+                    ተጠያቂነት፣
+                    አሳታፊነት ከራስ በላይ የህዝብ ጥቅም ማስቀደም፣
+                    አገልጋይነት:
+                    ታማኝነት፣
+                    ለጋራ ዓላማ መቆም::</p>
                 </div>
                 <div class="info-col" id="contact">
                     <h1>Contact Information</h1>
                     <div class="contact-detail">
-                        <span> free Phone number(ነፃ ስልክ ቁጥር):</span> ☎️9995 
+                        <span> free Phone number(ነፃ ስልክ ቁጥር):</span> ☎️9995
                     </div>
                     <div class="contact-detail">
-                        <span>Alemu📞Phone num:</span> (+251)935071709 
+                        <span>Alemu📞Phone num:</span> (+251)935071709
                     </div>
                     <div class="contact-detail">
-                        <span>Wanofi📞Phone num:</span> (+251)935071709 
+                        <span>Wanofi📞Phone num:</span> (+251)935071709
                     </div>
 
                     <div class="contact-detail">
                         <span>📩Email:</span> info@arada-enforcement.com
                     </div>
                     <div class="contact-detail" style="align-items: flex-start;">
-                        <span>Address:</span> 
+                        <span>Address:</span>
                         <div>
                             4kilo., Arada Sub-City<br>
                             Addis Ababa, Ethiopia
@@ -245,11 +254,12 @@
             </div>
             <div class="footer-copyright">
                 &copy; 2026 Arada Sub-City Code Enforcement. All rights reserved.<br>
-                    Developed by <strong>Alemu Samuel</strong>
-            
+                Developed by <strong>Alemu Samuel</strong>
+
             </div>
         </div>
     </footer>
 
 </body>
+
 </html>

@@ -3,36 +3,68 @@ import { Link } from 'react-router-dom';
 
 const services = [
   {
-    icon: '🏗️',
-    title: 'Illegal Construction Monitoring',
-    titleAm: 'ህገ ወጥ ግንባታ ቁጥጥር',
-    description:
-      'We inspect and take action on unauthorized construction activities, ensuring all buildings comply with Addis Ababa city regulations and permit requirements.',
-    color: 'blue',
-  },
-  {
     icon: '🌍',
-    title: 'Illegal Land Occupation',
+    title: 'Illegal Land Occupation Control',
     titleAm: 'ህገ ወጥ መሬት ወረራ ቁጥጥር',
     description:
       'Investigating and resolving cases of unauthorized land seizure and expansion to protect the rights of rightful landowners and communities.',
     color: 'green',
   },
   {
-    icon: '🗑️',
-    title: 'Waste & Sanitation Enforcement',
-    titleAm: 'ቆሻሻ እና ንፅህና ደንብ ማስከበር',
+    icon: '🏗️',
+    title: 'Illegal Construction Control',
+    titleAm: 'ህገ ወጥ ግንባታ ቁጥጥር',
     description:
-      'Enforcing proper waste disposal regulations, combating illegal dumping of solid and liquid waste, and keeping public spaces clean for all residents.',
+      'We inspect and take action on unauthorized construction activities, ensuring all buildings comply with Addis Ababa city regulations and permit requirements.',
+    color: 'blue',
+  },
+  {
+    icon: '📏',
+    title: 'Illegal Land Expansion Control',
+    titleAm: 'ህገ ወጥ መሬት ማስፋፋት ቁጥጥር',
+    description:
+      'Enforcing regulations against unauthorized expansion of land boundaries into public or neighboring properties.',
+    color: 'teal',
+  },
+  {
+    icon: '🏪',
+    title: 'Street Vending Control',
+    titleAm: 'ህገ ወጥ ጎዳና ንግድ ቁጥጥር',
+    description:
+      'Managing unauthorized street vending and trade activities to ensure orderly commerce while supporting legitimate vendors.',
+    color: 'indigo',
+  },
+  {
+    icon: '🗑️',
+    title: 'Waste & Sanitation Control',
+    titleAm: 'ህገ ወጥ ደረቅና ፋሳሽ ቆሻሻ ቁጥጥር',
+    description:
+      'Enforcing proper waste disposal regulations, combating illegal dumping of solid and liquid waste, and keeping public spaces clean.',
     color: 'yellow',
   },
   {
-    icon: '🛣️',
-    title: 'Road & Public Space Use',
-    titleAm: 'የመንገድ እና የህዝብ ቦታ አጠቃቀም',
+    icon: '🐄',
+    title: 'Animal Slaughter Control',
+    titleAm: 'ህገ ወጥ የእንስሳት እርድ ቁጥጥር',
     description:
-      'Regulating the proper use of roads, sidewalks, and public areas to ensure smooth traffic flow and safe pedestrian access.',
+      'Monitoring and enforcing regulations on animal slaughtering to ensure public health standards and prevent unauthorized slaughter.',
+    color: 'orange',
+  },
+  {
+    icon: '💼',
+    title: 'Illegal Business Usage Control',
+    titleAm: 'ህገ ወጥ ንግድ አጠቃቀም ቁጥጥር',
+    description:
+      'Regulating unauthorized business activities and ensuring businesses are operating according to proper zoning and licensing.',
     color: 'purple',
+  },
+  {
+    icon: '🔊',
+    title: 'Public Disturbance Control',
+    titleAm: 'ህገ ወጥ አዋኪ ድርጊት ቁጥጥር',
+    description:
+      'Addressing public nuisance, illegal noise pollution, and other disturbances to maintain a peaceful environment for all residents.',
+    color: 'red',
   },
   {
     icon: '📢',
@@ -40,31 +72,7 @@ const services = [
     titleAm: 'ህገ ወጥ ማስታወቂያ ቁጥጥር',
     description:
       'Removing unauthorized billboards, banners, and signage that violate city advertising standards and detract from the urban environment.',
-    color: 'red',
-  },
-  {
-    icon: '🐄',
-    title: 'Animal Slaughter Regulation',
-    titleAm: 'ህገ ወጥ የእንስሳት እርድ ቁጥጥር',
-    description:
-      'Monitoring and enforcing regulations on animal slaughtering to ensure public health standards and prevent unauthorized slaughter in residential areas.',
-    color: 'orange',
-  },
-  {
-    icon: '🏪',
-    title: 'Street Trade Enforcement',
-    titleAm: 'ህገ ወጥ ጎዳና ንግድ ቁጥጥር',
-    description:
-      'Managing unauthorized street vending and trade activities to ensure orderly commerce while supporting legitimate vendors in designated zones.',
-    color: 'teal',
-  },
-  {
-    icon: '⚖️',
-    title: 'Penalty & Fine Collection',
-    titleAm: 'ቅጣት እና ቅጣት ገቢ አሰባሰብ',
-    description:
-      'Issuing and collecting fines for code violations in accordance with city regulations, ensuring fairness, transparency, and accountability in enforcement.',
-    color: 'indigo',
+    color: 'blue',
   },
 ];
 

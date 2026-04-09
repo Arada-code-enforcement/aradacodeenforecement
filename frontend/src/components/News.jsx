@@ -36,6 +36,8 @@ const newsItems = [
   },
   {
     id: 4,
+
+
     date: 'January 30, 2026',
     category: 'Sanitation',
     categoryColor: 'bg-yellow-100 text-yellow-700',
@@ -95,11 +97,10 @@ const News = () => {
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
-              className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all border ${
-                activeCategory === cat
-                  ? 'bg-primary text-white border-primary shadow-sm'
-                  : 'bg-white text-textLight border-gray-200 hover:border-primary hover:text-primary'
-              }`}
+              className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all border ${activeCategory === cat
+                ? 'bg-primary text-white border-primary shadow-sm'
+                : 'bg-white text-textLight border-gray-200 hover:border-primary hover:text-primary'
+                }`}
             >
               {cat}
             </button>

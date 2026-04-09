@@ -87,20 +87,19 @@ const ReportForm = () => {
               className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all bg-white"
             >
               <option value="">-- የደንብ ጥሰት አይነት--</option>
-              <option value="zoning-land">በህገ ወጥ መሬት ወረራ</option>
-              <option value="zoning-expansion">በህገ ወጥ መሬት ማስፋፋት</option>
-              <option value="illegal-construction">በህገ ወጥ ግንባታ</option>
-              <option value="sanitation-waste">በህገ ወጥ ደረቅና ፋሳሽ ቆሻሻ</option>
-              <option value="road-use">በህገ ወጥ መንግድ አጠቃቀም</option>
-              <option value="advertisement">በህገ ወጥ ማስታወቃያ</option>
-              <option value="street-vending">በህገ ወጥ ጎዳና ንግድ</option>
-              <option value="animal-slaughter">በህገ ወጥ የእንስሳት እርድ</option>
-              <option value="public-disturbance">በህገ ወጥ አዋኪ ድርጊት</option>
+              <option value="zoning-land">ህገ ወጥ መሬት ወረራ ቁጥጥር</option>
+              <option value="illegal-construction">ህገ ወጥ ግንባታ ቁጥጥር</option>
+              <option value="zoning-expansion">ህገ ወጥ መሬት ማስፋፋት ቁጥጥር</option>
+              <option value="street-vending">ህገ ወጥ ጎዳና ንግድ ቁጥጥር</option>
+              <option value="sanitation-waste">ህገ ወጥ ደረቅና ፋሳሽ ቆሻሻ ቁጥጥር</option>
+              <option value="animal-slaughter">ህገ ወጥ የእንስሳት እርድ ቁጥጥር</option>
+              <option value="business-usage">ህገ ወጥ ንግድ አጠቃቀም ቁጥጥር</option>
+              <option value="public-disturbance">ህገ ወጥ አዋኪ ድርጊት ቁጥጥር</option>
+              <option value="advertisement">ህገ ወጥ ማስታወቂያ ቁጥጥር</option>
               <option value="regulation-180">በደንብ 180</option>
               <option value="other">Other</option>
             </select>
           </div>
-
           <div className="form-group">
             <label htmlFor="violationRule" className="block font-semibold mb-2 text-textDark">Select (ደንብ ቁጥር)</label>
             <select
@@ -148,7 +147,7 @@ const ReportForm = () => {
           </div>
 
           <div className="form-group">
-            <label htmlFor="dailyStatus" className="block font-semibold mb-2 text-textDark">Daily Status (የእለቱ ሁኔታ)</label>
+            <label htmlFor="dailyStatus" className="block font-semibold mb-2 text-textDark">ስለ ገቢ ሁኔታ</label>
             <select
               id="dailyStatus"
               value={formData.dailyStatus}
@@ -164,7 +163,7 @@ const ReportForm = () => {
           </div>
 
           <div className="form-group md:col-span-2">
-            <label htmlFor="violationDescription" className="block font-semibold mb-2 text-textDark">Additional Info (ከጨረታ ሽያጭ፤ የተቀጣ ገንዘብ መጠን)</label>
+            <label htmlFor="violationDescription" className="block font-semibold mb-2 text-textDark">Additional Information</label>
             <textarea
               id="violationDescription"
               value={formData.violationDescription}
@@ -210,10 +209,9 @@ const ReportForm = () => {
                     <td className="p-4">{report.violationRule}</td>
                     <td className="p-4 font-mono font-bold text-primary">{report.penaltyAmount} ETB</td>
                     <td className="p-4">
-                      <span className={`px-2 py-1 rounded-full text-[10px] font-bold uppercase ${
-                        report.dailyStatus === 'paid' ? 'bg-green-100 text-green-700' : 
+                      <span className={`px-2 py-1 rounded-full text-[10px] font-bold uppercase ${report.dailyStatus === 'paid' ? 'bg-green-100 text-green-700' :
                         report.dailyStatus === 'unpaid' ? 'bg-red-100 text-red-700' : 'bg-gray-100 text-gray-700'
-                      }`}>
+                        }`}>
                         {report.dailyStatus}
                       </span>
                     </td>
