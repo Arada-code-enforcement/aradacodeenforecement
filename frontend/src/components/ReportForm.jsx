@@ -13,6 +13,8 @@ const ReportForm = () => {
     violationDescription: '',
   });
 
+  const [isCustomAmount, setIsCustomAmount] = useState(false);
+
   const handleChange = (e) => {
     const { id, value } = e.target;
     setFormData((prev) => ({ ...prev, [id]: value }));
@@ -25,10 +27,10 @@ const ReportForm = () => {
         ...formData,
         timestamp: new Date().toISOString(),
       };
-      
+
       // Save to Firebase
       await addDoc(collection(db, "reports"), newReportData);
-      
+
       alert('Report Submitted Successfully! (ሪፖርቱ በትክክል ተልኳል)');
       setFormData({
         reporterName: '',
@@ -39,6 +41,7 @@ const ReportForm = () => {
         dailyStatus: '',
         violationDescription: '',
       });
+      setIsCustomAmount(false);
     } catch (error) {
       console.error("Error adding document: ", error);
       alert("Error submitting report. Please check configuration.");
@@ -131,28 +134,60 @@ const ReportForm = () => {
 
           <div className="form-group">
             <label htmlFor="penaltyAmount" className="block font-semibold mb-2 text-textDark">Penalty Amount (በገዘብ የተቀጣ ብር መጠን)</label>
-            <select
-              id="penaltyAmount"
-              value={formData.penaltyAmount}
-              onChange={handleChange}
-              required
-              className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all bg-white"
-            >
-              <option value="">Choose Amount</option>
-              <option value="0">-</option>
-              <option value="100">100 ብር</option>
-              <option value="200">200 ብር</option>
-              <option value="300">300 ብር</option>
-              <option value="500">500 ብር</option>
-              <option value="1000">1,000 ብር</option>
-              <option value="2000">2,000 ብር</option>
-              <option value="3000">3,000 ብር</option>
-              <option value="5000">5,000 ብር</option>
-              <option value="10000">10,000 ብር</option>
-              <option value="50000">50,000 ብር</option>
-              <option value="100000">100,000 ብር</option>
-              <option value="1000000">1,000,000 ብር</option>
-            </select>
+            {isCustomAmount ? (
+              <div className="relative group">
+                <input
+                  type="number"
+                  id="penaltyAmount"
+                  value={formData.penaltyAmount}
+                  onChange={handleChange}
+                  placeholder="Enter custom amount"
+                  required
+                  className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all font-medium"
+                />
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsCustomAmount(false);
+                    setFormData(prev => ({ ...prev, penaltyAmount: '' }));
+                  }}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-primary font-semibold hover:underline bg-white px-2"
+                >
+                  Choose from list
+                </button>
+              </div>
+            ) : (
+              <select
+                id="penaltyAmount"
+                value={formData.penaltyAmount}
+                onChange={(e) => {
+                  if (e.target.value === 'other') {
+                    setIsCustomAmount(true);
+                    setFormData(prev => ({ ...prev, penaltyAmount: '' }));
+                  } else {
+                    handleChange(e);
+                  }
+                }}
+                required
+                className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all bg-white"
+              >
+                <option value="">Choose Amount</option>
+                <option value="0">-</option>
+                <option value="100">100 ብር</option>
+                <option value="200">200 ብር</option>
+                <option value="300">300 ብር</option>
+                <option value="500">500 ብር</option>
+                <option value="1000">1,000 ብር</option>
+                <option value="2000">2,000 ብር</option>
+                <option value="3000">3,000 ብር</option>
+                <option value="5000">5,000 ብር</option>
+                <option value="10000">10,000 ብር</option>
+                <option value="50000">50,000 ብር</option>
+                <option value="100000">100,000 ብር</option>
+                <option value="1000000">1,000,000 ብር</option>
+                <option value="other">Other (የተለየ መጠን)</option>
+              </select>
+            )}
           </div>
 
           <div className="form-group">
