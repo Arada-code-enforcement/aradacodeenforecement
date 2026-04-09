@@ -4,12 +4,10 @@ import aradaLogo from '../assets/logo.jpg';
 
 const navLinks = [
   { to: '/', label: 'Home' },
-  { to: '#about', label: 'About Us' },
   { to: '/services', label: 'Services' },
   { to: '/news', label: 'News' },
   { to: '/documents', label: 'Documents' },
   { to: '/compliment', label: 'Compliments' },
-  { to: '#contact', label: 'Contact' },
 ];
 
 const Navbar = () => {

@@ -3,7 +3,6 @@ import { Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Navbar from './components/Navbar';
 import CardsSection from './components/CardsSection';
-import OrganizationInfo from './components/OrganizationInfo';
 import ReportForm from './components/ReportForm';
 import ComplimentForm from './components/ComplimentForm';
 import Services from './components/Services';
@@ -20,11 +19,9 @@ import PageBanner from './components/PageBanner';
 const Home = () => (
   <>
     <Header />
-    <Hero />
-    <main id="about" className="py-16 flex-grow">
+    <main className="py-16 flex-grow">
       <div className="max-w-[1200px] mx-auto px-5">
         <CardsSection />
-        <OrganizationInfo />
       </div>
     </main>
   </>

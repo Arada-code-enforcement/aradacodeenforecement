@@ -12,20 +12,20 @@ const CardsSection = () => {
         <Link to="/report" className="btn">Submit a Report</Link>
       </div>
 
-      {/* Card 2 */}
+      {/* Card 2 - Services */}
       <div className="bg-white rounded-md p-8 text-center shadow-sm hover:-translate-y-1 hover:shadow-md transition-all duration-300 border-t-[5px] border-primary">
-        <div className="text-5xl mb-4 text-primary">📋</div>
-        <h3 className="text-xl font-bold mb-2">About Code Enforcement Office</h3>
-        <p className="text-textLight mb-4">Learn about our mission, what we regulate, and how we help keep our sub-city safe and orderly.</p>
-        <a href="#about" className="btn">Learn More</a>
+        <div className="text-5xl mb-4 text-primary">🛠️</div>
+        <h3 className="text-xl font-bold mb-2">Our Services</h3>
+        <p className="text-textLight mb-4">Discover the various code enforcement services we provide to keep our community safe.</p>
+        <Link to="/services" className="btn">View Services</Link>
       </div>
 
-      {/* Card 3 */}
+      {/* Card 3 - Documents */}
       <div className="bg-white rounded-md p-8 text-center shadow-sm hover:-translate-y-1 hover:shadow-md transition-all duration-300 border-t-[5px] border-primary">
-        <div className="text-5xl mb-4 text-primary">✉️</div>
-        <h3 className="text-xl font-bold mb-2">Contact Us</h3>
-        <p className="text-textLight mb-4">Have questions or need assistance? Get in touch with our office directly for support.</p>
-        <a href="#contact" className="btn">Contact Info</a>
+        <div className="text-5xl mb-4 text-primary">📄</div>
+        <h3 className="text-xl font-bold mb-2">Official Documents</h3>
+        <p className="text-textLight mb-4">Access regulatory guidelines, city codes, and official administrative documents.</p>
+        <Link to="/documents" className="btn">View Documents</Link>
       </div>
 
       {/* Card 4 - Compliment */}
