@@ -104,6 +104,7 @@ const ReportForm = () => {
               <option value="public-disturbance">ህገ ወጥ አዋኪ ድርጊት ቁጥጥር</option>
               <option value="advertisement">ህገ ወጥ ማስታወቂያ ቁጥጥር</option>
               <option value="regulation-180">በደንብ 180</option>
+              <option value="none">----</option>
               <option value="other">Other</option>
             </select>
           </div>
@@ -123,6 +124,7 @@ const ReportForm = () => {
               <option value="167/2016-org">ድርጅት በደ/ቁጥር 167/2016</option>
               <option value="180/2017-individual">ግለሰብ በደ/ቁጥር 180/2017</option>
               <option value="180/2017-org">ድርጅት በደ/ቁጥር 180/2017</option>
+              <option value="none">----</option>
               <option value="other">Other</option>
             </select>
           </div>
