@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { db } from '../firebase';
-import { collection, addDoc, getDocs, query, orderBy } from 'firebase/firestore';
+import { collection, addDoc } from 'firebase/firestore';
 
 const ReportForm = () => {
   const [formData, setFormData] = useState({
@@ -13,32 +13,10 @@ const ReportForm = () => {
     violationDescription: '',
   });
 
-  const [submittedReports, setSubmittedReports] = useState([]);
-
   const handleChange = (e) => {
     const { id, value } = e.target;
     setFormData((prev) => ({ ...prev, [id]: value }));
   };
-
-  useEffect(() => {
-    const fetchReports = async () => {
-      try {
-        const q = query(collection(db, "reports"), orderBy("timestamp", "desc"));
-        const querySnapshot = await getDocs(q);
-        const reportsData = [];
-        querySnapshot.forEach((doc) => {
-          // Format date for display just like before
-          const rawData = doc.data();
-          const displayDate = new Date(rawData.timestamp).toLocaleString();
-          reportsData.push({ id: doc.id, ...rawData, timestamp: displayDate });
-        });
-        setSubmittedReports(reportsData);
-      } catch (error) {
-        console.error("Error fetching reports, probably missing Firebase config: ", error);
-      }
-    };
-    fetchReports();
-  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -49,15 +27,8 @@ const ReportForm = () => {
       };
       
       // Save to Firebase
-      const docRef = await addDoc(collection(db, "reports"), newReportData);
+      await addDoc(collection(db, "reports"), newReportData);
       
-      const newReport = {
-        ...newReportData,
-        id: docRef.id,
-        timestamp: new Date().toLocaleString()
-      };
-
-      setSubmittedReports((prev) => [newReport, ...prev]);
       alert('Report Submitted Successfully! (ሪፖርቱ በትክክል ተልኳል)');
       setFormData({
         reporterName: '',
@@ -217,48 +188,6 @@ const ReportForm = () => {
           </div>
         </form>
       </section>
-
-      {submittedReports.length > 0 && (
-        <section className="bg-white p-8 rounded-2xl shadow-md border border-gray-100 mb-16 overflow-hidden animate-fade-in">
-          <h3 className="text-2xl font-bold text-textDark mb-6 pb-2 border-b-2 border-primary/20">
-            Submitted Reports (የገቡ ሪፖርቶች)
-          </h3>
-          <div className="overflow-x-auto">
-            <table className="w-full text-left border-collapse">
-              <thead>
-                <tr className="bg-bgLight text-textDark uppercase text-xs font-bold tracking-wider">
-                  <th className="p-4 border-b">Reporter</th>
-                  <th className="p-4 border-b">Wereda</th>
-                  <th className="p-4 border-b">Type</th>
-                  <th className="p-4 border-b">Rule</th>
-                  <th className="p-4 border-b">Amount</th>
-                  <th className="p-4 border-b">Status</th>
-                  <th className="p-4 border-b">Details</th>
-                </tr>
-              </thead>
-              <tbody className="text-sm">
-                {submittedReports.map((report) => (
-                  <tr key={report.id} className="hover:bg-gray-50 transition-colors border-b border-gray-50">
-                    <td className="p-4 font-medium">{report.reporterName || 'Anonymous'}</td>
-                    <td className="p-4">ወረዳ 0{report.violationWereda}</td>
-                    <td className="p-4 truncate max-w-[150px]" title={report.violationType}>{report.violationType}</td>
-                    <td className="p-4">{report.violationRule}</td>
-                    <td className="p-4 font-mono font-bold text-primary">{report.penaltyAmount} ETB</td>
-                    <td className="p-4">
-                      <span className={`px-2 py-1 rounded-full text-[10px] font-bold uppercase ${report.dailyStatus === 'paid' ? 'bg-green-100 text-green-700' :
-                        report.dailyStatus === 'unpaid' ? 'bg-red-100 text-red-700' : 'bg-gray-100 text-gray-700'
-                        }`}>
-                        {report.dailyStatus}
-                      </span>
-                    </td>
-                    <td className="p-4 text-xs italic text-textLight">{report.violationDescription}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </section>
-      )}
     </div>
   );
 };

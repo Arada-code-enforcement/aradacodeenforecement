@@ -13,6 +13,7 @@ import Documents from './components/Documents';
 import Hero from './components/Hero';
 import AnnouncementTicker from './components/AnnouncementTicker';
 import Footer from './components/Footer';
+import AdminDashboard from './components/AdminDashboard';
 
 // A simple Home wrapper component for the homepage content
 const Home = () => (
@@ -45,6 +46,7 @@ function App() {
         <Route path="/documents" element={<Documents />} />
         <Route path="/report" element={<main className="py-16 lg:py-24 flex-grow bg-bgLight px-5"><ReportForm /></main>} />
         <Route path="/compliment" element={<main className="py-16 lg:py-24 flex-grow bg-bgLight px-5"><ComplimentForm /></main>} />
+        <Route path="/admin" element={<main className="py-16 lg:py-24 flex-grow bg-bgLight px-5"><AdminDashboard /></main>} />
       </Routes>
 
       <Footer />
