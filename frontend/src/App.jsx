@@ -14,6 +14,7 @@ import Footer from './components/Footer';
 import AdminDashboard from './components/AdminDashboard';
 import TopBar from './components/TopBar';
 import PageBanner from './components/PageBanner';
+import Gallery from './components/Gallery';
 
 // A simple Home wrapper component for the homepage content
 const Home = () => (
@@ -22,6 +23,7 @@ const Home = () => (
     <main className="py-16 flex-grow">
       <div className="max-w-[1200px] mx-auto px-5">
         <CardsSection />
+        <Gallery />
       </div>
     </main>
   </>
