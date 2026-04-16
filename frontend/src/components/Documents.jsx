@@ -242,7 +242,7 @@ const Documents = () => {
           </p>
         </div>
       </div>
-    </main>
+    </div>
   );
 };
 export default Documents;

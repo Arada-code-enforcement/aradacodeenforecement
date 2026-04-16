@@ -8,7 +8,6 @@ import ComplimentForm from './components/ComplimentForm';
 import Services from './components/Services';
 import News from './components/News';
 import Documents from './components/Documents';
-import Hero from './components/Hero';
 import AnnouncementTicker from './components/AnnouncementTicker';
 import Footer from './components/Footer';
 import AdminDashboard from './components/AdminDashboard';
@@ -18,7 +17,7 @@ import Gallery from './components/Gallery';
 
 // A simple Home wrapper component for the homepage content
 const Home = () => (
-  <>
+  <div className="home-background">
     <Header />
     <main className="py-16 flex-grow">
       <div className="max-w-[1200px] mx-auto px-5">
@@ -26,7 +25,7 @@ const Home = () => (
         <Gallery />
       </div>
     </main>
-  </>
+  </div>
 );
 function App() {
   return (

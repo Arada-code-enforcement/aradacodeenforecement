@@ -22,8 +22,8 @@ const Gallery = () => {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
         {images.map((item, index) => (
-          <div 
-            key={index} 
+          <div
+            key={index}
             className="group relative h-80 overflow-hidden rounded-2xl shadow-lg transition-all duration-500 hover:shadow-2xl hover:-translate-y-2"
           >
             {/* Image Overlay - Visible on Hover */}
@@ -37,8 +37,8 @@ const Gallery = () => {
             </div>
 
             {/* Main Image */}
-            <img 
-              src={item.src} 
+            <img
+              src={item.src}
               alt={item.title}
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               onError={(e) => {

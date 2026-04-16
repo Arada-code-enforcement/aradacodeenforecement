@@ -5,7 +5,7 @@ const CardsSection = () => {
   return (
     <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
       {/* Card 1 */}
-      <div className="bg-white/70 backdrop-blur-md rounded-2xl p-8 text-center shadow-sm hover:-translate-y-1 hover:shadow-xl transition-all duration-500 border border-white/50 border-t-[5px] border-primary">
+      <div className="bg-white/60 backdrop-blur-lg rounded-2xl p-8 text-center shadow-lg hover:-translate-y-2 hover:shadow-2xl transition-all duration-500 border border-white/40 border-t-[5px] border-primary group">
         <div className="text-5xl mb-4 text-primary">🏦</div>
         <h3 className="text-xl font-bold mb-2">Finance Report</h3>
         <p className="text-textLight mb-4 text-sm leading-relaxed">Report issues such as illegal dumping, unsafe buildings, or other community code violations anonymously.</p>
@@ -13,7 +13,7 @@ const CardsSection = () => {
       </div>
 
       {/* Card 2 - Services */}
-      <div className="bg-white/70 backdrop-blur-md rounded-2xl p-8 text-center shadow-sm hover:-translate-y-1 hover:shadow-xl transition-all duration-500 border border-white/50 border-t-[5px] border-primary">
+      <div className="bg-white/60 backdrop-blur-lg rounded-2xl p-8 text-center shadow-lg hover:-translate-y-2 hover:shadow-2xl transition-all duration-500 border border-white/40 border-t-[5px] border-primary group">
         <div className="text-5xl mb-4 text-primary">🛠️</div>
         <h3 className="text-xl font-bold mb-2">Our Services</h3>
         <p className="text-textLight mb-4 text-sm leading-relaxed">Discover the various code enforcement services we provide to keep our community safe.</p>
@@ -21,7 +21,7 @@ const CardsSection = () => {
       </div>
 
       {/* Card 3 - Documents */}
-      <div className="bg-white/70 backdrop-blur-md rounded-2xl p-8 text-center shadow-sm hover:-translate-y-1 hover:shadow-xl transition-all duration-500 border border-white/50 border-t-[5px] border-primary">
+      <div className="bg-white/60 backdrop-blur-lg rounded-2xl p-8 text-center shadow-lg hover:-translate-y-2 hover:shadow-2xl transition-all duration-500 border border-white/40 border-t-[5px] border-primary group">
         <div className="text-5xl mb-4 text-primary">📄</div>
         <h3 className="text-xl font-bold mb-2">Official Documents</h3>
         <p className="text-textLight mb-4 text-sm leading-relaxed">Access regulatory guidelines, city codes, and official administrative documents.</p>

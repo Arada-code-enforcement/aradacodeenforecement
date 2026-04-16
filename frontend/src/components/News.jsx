@@ -132,8 +132,7 @@ const News = () => {
             </div>
           )}
         </div>
-      </div>
-    </main>
+    </div>
   );
 };
 
