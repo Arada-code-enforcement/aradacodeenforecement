@@ -7,7 +7,7 @@ const Header = () => {
     <header className="relative bg-darkFooter text-white pt-32 pb-24 lg:pt-40 lg:pb-32 overflow-hidden">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/85 to-darkFooter/80 z-10 mix-blend-multiply transition-opacity duration-1000"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/60 to-darkFooter/40 z-10 transition-opacity duration-1000"></div>
         <img
           src={mainBg}
           alt="Arada Sub-City"

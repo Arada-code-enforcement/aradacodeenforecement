@@ -31,7 +31,7 @@ html {
   }
 
   .home-background {
-    background-image: linear-gradient(to bottom, rgba(235, 240, 245, 0.88), rgba(235, 240, 245, 0.88)), url('./assets/main-bg.jpg');
+    background-image: linear-gradient(to bottom, rgba(235, 240, 245, 0.85), rgba(235, 240, 245, 0.85)), url('./assets/main-bg.jpg');
     background-attachment: fixed;
     background-size: cover;
     background-position: center;
