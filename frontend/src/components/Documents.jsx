@@ -164,15 +164,8 @@ const Documents = () => {
     return matchesCategory && matchesSearch;
   });
   return (
-    <main className="flex-grow bg-bgLight">
-      {/* Hero Banner */}
-      <div className="bg-primary text-white py-20 pt-36 text-center px-5">
-        <h1 className="text-4xl md:text-5xl font-bold mb-4">Official Documents</h1>
-        <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto">
-          Access public regulations, enforcement guidelines, official reports, and government forms from Arada Sub-City Code Enforcement.
-        </p>
-      </div>
-      <div className="max-w-[1000px] mx-auto px-5 py-16">
+    <div className="py-16">
+      <div className="max-w-[1000px] mx-auto px-5">
         {/* Search + Filter Row */}
         <div className="flex flex-col md:flex-row gap-4 mb-8">
           <input

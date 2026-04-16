@@ -89,16 +89,7 @@ const colorMap = {
 
 const Services = () => {
   return (
-    <main className="flex-grow bg-bgLight">
-      {/* Hero Banner */}
-      <div className="bg-primary text-white py-20 pt-36 text-center px-5">
-        <h1 className="text-4xl md:text-5xl font-bold mb-4">Our Services</h1>
-        <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto">
-          Arada Sub-City Code Enforcement provides a wide range of services to maintain order,
-          safety, and compliance across our community.
-        </p>
-      </div>
-
+    <div className="py-16">
       {/* Services Grid */}
       <div className="max-w-[1200px] mx-auto px-5 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
@@ -137,7 +128,7 @@ const Services = () => {
           </Link>
         </div>
       </div>
-    </main>
+    </div>
   );
 };
 

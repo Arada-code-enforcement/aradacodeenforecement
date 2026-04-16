@@ -81,16 +81,8 @@ const News = () => {
     : newsItems.filter((n) => n.category === activeCategory);
 
   return (
-    <main className="flex-grow bg-bgLight">
-      {/* Hero Banner */}
-      <div className="bg-primary text-white py-20 pt-36 text-center px-5">
-        <h1 className="text-4xl md:text-5xl font-bold mb-4">Latest News</h1>
-        <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto">
-          Stay informed about enforcement activities, community initiatives, and policy updates from Arada Sub-City Code Enforcement.
-        </p>
-      </div>
-
-      <div className="max-w-[1000px] mx-auto px-5 py-16">
+    <div className="py-16">
+      {/* News Cards */}
         {/* Category Filter */}
         <div className="flex flex-wrap gap-2 justify-center mb-10">
           {categories.map((cat) => (
