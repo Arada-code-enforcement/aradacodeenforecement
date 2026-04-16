@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { db } from '../firebase';
+import { db, storage } from '../firebase';
 import { collection, addDoc } from 'firebase/firestore';
+import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 
 const ReportForm = () => {
   const [formData, setFormData] = useState({
@@ -13,6 +14,9 @@ const ReportForm = () => {
     violationDescription: '',
   });
 
+  const [file, setFile] = useState(null);
+  const [uploadProgress, setUploadProgress] = useState(0);
+  const [isUploading, setIsUploading] = useState(false);
   const [isCustomAmount, setIsCustomAmount] = useState(false);
 
   const handleChange = (e) => {
@@ -20,18 +24,62 @@ const ReportForm = () => {
     setFormData((prev) => ({ ...prev, [id]: value }));
   };
 
+  const handleFileChange = (e) => {
+    if (e.target.files[0]) {
+      setFile(e.target.files[0]);
+    }
+  };
+
+  const uploadFile = () => {
+    return new Promise((resolve, reject) => {
+      if (!file) {
+        resolve(null);
+        return;
+      }
+
+      const storageRef = ref(storage, `reports/${Date.now()}_${file.name}`);
+      const uploadTask = uploadBytesResumable(storageRef, file);
+
+      setIsUploading(true);
+
+      uploadTask.on(
+        'state_changed',
+        (snapshot) => {
+          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          setUploadProgress(progress);
+        },
+        (error) => {
+          console.error("Upload error:", error);
+          setIsUploading(false);
+          reject(error);
+        },
+        async () => {
+          const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+          setIsUploading(false);
+          resolve(downloadURL);
+        }
+      );
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      // 1. Upload File first if exists
+      const fileUrl = await uploadFile();
+
       const newReportData = {
         ...formData,
+        fileUrl: fileUrl || null,
         timestamp: new Date().toISOString(),
       };
 
-      // Save to Firebase
+      // 2. Save to Firestore
       await addDoc(collection(db, "reports"), newReportData);
 
       alert('Report Submitted Successfully! (ሪፖርቱ በትክክል ተልኳል)');
+      
+      // Reset form
       setFormData({
         reporterName: '',
         violationWereda: '',
@@ -41,10 +89,13 @@ const ReportForm = () => {
         dailyStatus: '',
         violationDescription: '',
       });
+      setFile(null);
+      setUploadProgress(0);
       setIsCustomAmount(false);
     } catch (error) {
-      console.error("Error adding document: ", error);
+      console.error("Error submitting report: ", error);
       alert("Error submitting report. Please check configuration.");
+      setIsUploading(false);
     }
   };
 
@@ -60,7 +111,7 @@ const ReportForm = () => {
               value={formData.reporterName}
               onChange={handleChange}
               placeholder="Enter name"
-              className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all"
+              className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all font-sans"
             />
           </div>
 
@@ -71,7 +122,7 @@ const ReportForm = () => {
               value={formData.violationWereda}
               onChange={handleChange}
               required
-              className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all bg-white"
+              className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all bg-white font-sans"
             >
               <option value="">ወረዳ--</option>
               {[1, 2, 4, 5, 6, 7, 8, 9].map((w) => (
@@ -87,7 +138,7 @@ const ReportForm = () => {
               value={formData.violationType}
               onChange={handleChange}
               required
-              className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all bg-white"
+              className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all bg-white font-sans"
             >
               <option value="">-- የደንብ ጥሰት አይነት--</option>
               <option value="zoning-land">ህገ ወጥ መሬት ወረራ ቁጥጥር</option>
@@ -111,7 +162,7 @@ const ReportForm = () => {
               value={formData.violationRule}
               onChange={handleChange}
               required
-              className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all bg-white"
+              className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all bg-white font-sans"
             >
               <option value="">Choose Rule</option>
               <option value="150/2015-individual">ግለሰብ በደ/ቁጥር 150/2015</option>
@@ -136,7 +187,7 @@ const ReportForm = () => {
                   onChange={handleChange}
                   placeholder="Enter custom amount"
                   required
-                  className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all font-medium"
+                  className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all font-medium font-sans"
                 />
                 <button
                   type="button"
@@ -162,7 +213,7 @@ const ReportForm = () => {
                   }
                 }}
                 required
-                className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all bg-white"
+                className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all bg-white font-sans"
               >
                 <option value="">Choose Amount</option>
                 <option value="0">-</option>
@@ -190,13 +241,46 @@ const ReportForm = () => {
               value={formData.dailyStatus}
               onChange={handleChange}
               required
-              className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all bg-white"
+              className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all bg-white font-sans"
             >
               <option value="">Choose Status</option>
               <option value="paid">ገቢ የተደረገ (Collected)</option>
               <option value="unpaid">ገቢ ያልተደረገ (Not Collected)</option>
               <option value="none">በዛሬው ዕለት ቅጣት የለም</option>
             </select>
+          </div>
+
+          <div className="form-group md:col-span-2">
+            <label htmlFor="evidenceFile" className="block font-semibold mb-2 text-textDark">🖇️ Attach Evidence (ፎቶ ወይም ሰነድ ያያይዙ)</label>
+            <div className="relative border-2 border-dashed border-gray-200 rounded-xl p-6 hover:border-primary/50 transition-colors group">
+              <input
+                type="file"
+                id="evidenceFile"
+                onChange={handleFileChange}
+                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
+              />
+              <div className="text-center">
+                <div className="text-4xl mb-2 text-gray-400 group-hover:text-primary transition-colors">📁</div>
+                <p className="text-textLight font-medium">
+                  {file ? file.name : "Click or drag to upload file (Optional)"}
+                </p>
+                <p className="text-xs text-gray-400 mt-1">Images or Documents (MAX 10MB)</p>
+              </div>
+            </div>
+            {isUploading && (
+              <div className="mt-4">
+                <div className="h-2 w-full bg-gray-100 rounded-full overflow-hidden">
+                  <div 
+                    className="h-full bg-primary transition-all duration-300" 
+                    style={{ width: `${uploadProgress}%` }}
+                  ></div>
+                </div>
+                <p className="text-xs text-primary mt-2 flex justify-between">
+                  <span>Uploading evidence...</span>
+                  <span>{Math.round(uploadProgress)}%</span>
+                </p>
+              </div>
+            )}
           </div>
 
           <div className="form-group md:col-span-2">
@@ -207,13 +291,17 @@ const ReportForm = () => {
               onChange={handleChange}
               placeholder="Provide details..."
               required
-              className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all min-h-[120px] resize-y"
+              className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all min-h-[120px] resize-y font-sans"
             ></textarea>
           </div>
 
           <div className="md:col-span-2 text-center mt-4">
-            <button type="submit" className="btn min-w-[250px] py-4 text-lg">
-              Submit Report (ሪፖርቱን ላክ)
+            <button 
+              type="submit" 
+              disabled={isUploading}
+              className={`btn min-w-[250px] py-4 text-lg ${isUploading ? 'opacity-50 cursor-not-allowed' : ''}`}
+            >
+              {isUploading ? 'Processing...' : 'Submit Report (ሪፖርቱን ላክ)'}
             </button>
           </div>
         </form>
