@@ -41,7 +41,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/services" element={
-          <main className="flex-grow bg-bgLight">
+          <main className="flex-grow bg-bgLight/40 backdrop-blur-[2px]">
             <PageBanner title="Our Services" subtitle="Discover how we serve and protect our community." />
             <div className="max-w-[1200px] mx-auto px-5 pb-16">
               <Services />
@@ -49,7 +49,7 @@ function App() {
           </main>
         } />
         <Route path="/news" element={
-          <main className="flex-grow bg-bgLight">
+          <main className="flex-grow bg-bgLight/40 backdrop-blur-[2px]">
             <PageBanner title="Latest News" subtitle="Stay updated with the latest news and announcements." />
             <div className="max-w-[1200px] mx-auto px-5 pb-16">
               <News />
@@ -57,7 +57,7 @@ function App() {
           </main>
         } />
         <Route path="/documents" element={
-          <main className="flex-grow bg-bgLight">
+          <main className="flex-grow bg-bgLight/40 backdrop-blur-[2px]">
             <PageBanner title="Official Documents" subtitle="Access regulatory documents and city guidelines." />
             <div className="max-w-[1200px] mx-auto px-5 pb-16">
               <Documents />
@@ -65,7 +65,7 @@ function App() {
           </main>
         } />
         <Route path="/report" element={
-          <main className="flex-grow bg-bgLight">
+          <main className="flex-grow bg-bgLight/40 backdrop-blur-[2px]">
             <PageBanner title="Finance Report" subtitle="Please fill out the form below to report a code violation." />
             <div className="max-w-[1200px] mx-auto px-5 -mt-12 relative z-20 pb-16">
               <ReportForm />
@@ -73,7 +73,7 @@ function App() {
           </main>
         } />
         <Route path="/compliment" element={
-          <main className="flex-grow bg-bgLight">
+          <main className="flex-grow bg-bgLight/40 backdrop-blur-[2px]">
             <PageBanner title="Submit a Compliment" subtitle="Did one of our officers do a great job? Let us know!" />
             <div className="max-w-[1200px] mx-auto px-5 -mt-12 relative z-20 pb-16">
               <ComplimentForm />
@@ -81,7 +81,7 @@ function App() {
           </main>
         } />
         <Route path="/admin" element={
-          <main className="flex-grow bg-bgLight">
+          <main className="flex-grow bg-bgLight/40 backdrop-blur-[2px]">
             <PageBanner title="Admin Dashboard" subtitle="Manage reports and system configurations." />
             <div className="max-w-[1200px] mx-auto px-5 pb-16">
               <AdminDashboard />

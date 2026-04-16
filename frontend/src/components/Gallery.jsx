@@ -1,17 +1,11 @@
-import React from 'react';
-
-// Attempting to import images. If they don't exist yet, we'll handle it nicely.
-import img1 from '../assets/img1.jpg';
-import img2 from '../assets/img2.jpg';
-import img3 from '../assets/img3.jpg';
-import img4 from '../assets/img4.jpg';
+import mainBg from '../assets/main-bg.jpg';
 
 const Gallery = () => {
   const images = [
-    { src: img1, title: 'Stakeholders Training', desc: 'Engaging with community leaders and stakeholders.' },
-    { src: img2, title: 'Official Briefing', desc: 'Official announcement and regulatory updates.' },
-    { src: img3, title: 'Officer Orientation', desc: 'Internal staff training and code of conduct review.' },
-    { src: img4, title: 'Collaborative Meeting', desc: 'Working together for a safer and cleaner sub-city.' },
+    { src: mainBg, title: 'Arada Sub-City Hub', desc: 'The architectural heart of our modern sub-city administrative district.' },
+    { src: 'https://images.unsplash.com/photo-1541970233221-70d7c83da4b3?auto=format&fit=crop&w=800&q=80', title: 'Official Briefing', desc: 'Official announcement and regulatory updates.' },
+    { src: 'https://images.unsplash.com/photo-1577412647305-991150c7d163?auto=format&fit=crop&w=800&q=80', title: 'Officer Orientation', desc: 'Internal staff training and code of conduct review.' },
+    { src: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80', title: 'Collaborative Meeting', desc: 'Working together for a safer and cleaner sub-city.' },
   ];
 
   return (

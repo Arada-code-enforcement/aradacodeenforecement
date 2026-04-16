@@ -23,7 +23,11 @@ html {
 
 @layer base {
   body {
-    @apply bg-bgLight text-textDark antialiased leading-relaxed;
+    @apply bg-bgLight text-textDark antialiased leading-relaxed relative min-h-screen;
+    background-image: linear-gradient(to bottom, rgba(235, 240, 245, 0.95), rgba(235, 240, 245, 0.95)), url('./assets/main-bg.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
   }
 }
 
