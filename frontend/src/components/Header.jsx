@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import mainBg from '../assets/main-bg.jpg';
 
 const Header = () => {
   return (
@@ -8,9 +9,12 @@ const Header = () => {
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-r from-primary/95 to-darkFooter/90 z-10 mix-blend-multiply"></div>
         <img
-          src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80"
-          alt="City skyline"
+          src={mainBg}
+          alt="Arada Sub-City"
           className="w-full h-full object-cover object-center"
+          onError={(e) => {
+            e.target.src = "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80";
+          }}
         />
       </div>
 

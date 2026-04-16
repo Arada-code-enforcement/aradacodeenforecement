@@ -1,10 +1,24 @@
 import React from 'react';
+import mainBg from '../assets/main-bg.jpg';
 
 const PageBanner = ({ title, subtitle }) => {
   return (
     <div className="bg-primary text-white pt-28 pb-14 lg:pt-36 lg:pb-20 relative overflow-hidden">
+      {/* Background Image Overlay for Banners */}
+      <div className="absolute inset-0 z-0 opacity-40">
+        <img 
+          src={mainBg} 
+          alt="" 
+          className="w-full h-full object-cover object-center"
+          onError={(e) => {
+            e.target.style.display = 'none';
+          }}
+        />
+        <div className="absolute inset-0 bg-primary mix-blend-multiply"></div>
+      </div>
+
       {/* Decorative Background Elements */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full -mr-48 -mt-48 blur-3xl"></div>
+      <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full -mr-48 -mt-48 blur-3xl z-10"></div>
       <div className="absolute bottom-0 left-0 w-64 h-64 bg-primary-light/10 rounded-full -ml-32 -mb-32 blur-2xl animate-pulse"></div>
       <div className="absolute top-1/2 left-1/4 w-32 h-32 bg-white/5 rotate-45 blur-xl"></div>
 
