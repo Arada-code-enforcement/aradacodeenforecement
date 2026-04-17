@@ -313,7 +313,6 @@ const AdminDashboard = () => {
                   <th className="p-3 sm:p-4 border-b">Amount</th>
                   <th className="p-3 sm:p-4 border-b">Status</th>
                   <th className="p-3 sm:p-4 border-b">Details</th>
-                  <th className="p-3 sm:p-4 border-b">Evidence</th>
                   <th className="p-3 sm:p-4 border-b text-center">Actions</th>
                 </tr>
               </thead>
@@ -334,15 +333,6 @@ const AdminDashboard = () => {
                       </span>
                     </td>
                     <td className="p-3 sm:p-4 text-xs italic text-textLight">{report.violationDescription?.substring(0,30)}...</td>
-                    <td className="p-3 sm:p-4 text-xs">
-                      {report.fileUrl ? (
-                        <a href={report.fileUrl} target="_blank" rel="noopener noreferrer" className="text-primary font-bold hover:underline flex items-center gap-1">
-                          🖼️ View Photo
-                        </a>
-                      ) : (
-                        <span className="text-gray-400">No Photo</span>
-                      )}
-                    </td>
                     <td className="p-3 sm:p-4 flex gap-2 justify-center">
                       <button onClick={() => setEditingReport(report)} className="bg-blue-100 hover:bg-blue-200 text-blue-700 px-3 py-1.5 rounded-lg text-xs font-bold transition-colors">Edit</button>
                       <button onClick={() => handleDeleteReport(report.id)} className="bg-red-100 hover:bg-red-200 text-red-700 px-3 py-1.5 rounded-lg text-xs font-bold transition-colors">Delete</button>

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { db, storage } from '../firebase';
 import { collection, addDoc } from 'firebase/firestore';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
-import imageCompression from 'browser-image-compression';
 
 const ReportForm = () => {
   const [formData, setFormData] = useState({
@@ -15,9 +14,6 @@ const ReportForm = () => {
     violationDescription: '',
   });
 
-  const [file, setFile] = useState(null);
-  const [uploadProgress, setUploadProgress] = useState(0);
-  const [isUploading, setIsUploading] = useState(false);
   const [isCustomAmount, setIsCustomAmount] = useState(false);
 
   const handleChange = (e) => {
@@ -25,66 +21,13 @@ const ReportForm = () => {
     setFormData((prev) => ({ ...prev, [id]: value }));
   };
 
-  const handleFileChange = (e) => {
-    if (e.target.files[0]) {
-      setFile(e.target.files[0]);
-    }
-  };
-
-  const uploadFile = async () => {
-    if (!file) return null;
-
-    try {
-      // 1. Compression
-      const options = {
-        maxSizeMB: 1,
-        maxWidthOrHeight: 1920,
-        useWebWorker: true,
-      };
-      
-      const compressedFile = await imageCompression(file, options);
-      
-      // 2. Upload
-      return new Promise((resolve, reject) => {
-        const storageRef = ref(storage, `reports/${Date.now()}_${file.name}`);
-        const uploadTask = uploadBytesResumable(storageRef, compressedFile);
-
-        setIsUploading(true);
-
-        uploadTask.on(
-          'state_changed',
-          (snapshot) => {
-            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            setUploadProgress(progress);
-          },
-          (error) => {
-            console.error("Upload error:", error);
-            setIsUploading(false);
-            reject(error);
-          },
-          async () => {
-            const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-            setIsUploading(false);
-            resolve(downloadURL);
-          }
-        );
-      });
-    } catch (error) {
-      console.error("Compression error:", error);
-      throw error;
-    }
-  };
 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // 1. Upload File first if exists
-      const fileUrl = await uploadFile();
-
       const newReportData = {
         ...formData,
-        fileUrl: fileUrl || null,
         timestamp: new Date().toISOString(),
       };
 
@@ -93,7 +36,6 @@ const ReportForm = () => {
 
       alert('Report Submitted Successfully! (ሪፖርቱ በትክክል ተልኳል)');
       
-      // Reset form
       setFormData({
         reporterName: '',
         violationWereda: '',
@@ -103,13 +45,10 @@ const ReportForm = () => {
         dailyStatus: '',
         violationDescription: '',
       });
-      setFile(null);
-      setUploadProgress(0);
       setIsCustomAmount(false);
     } catch (error) {
       console.error("Error submitting report: ", error);
       alert("Error submitting report. Please check configuration.");
-      setIsUploading(false);
     }
   };
 
@@ -264,38 +203,6 @@ const ReportForm = () => {
             </select>
           </div>
 
-          <div className="form-group md:col-span-2">
-            <label htmlFor="evidenceFile" className="block font-semibold mb-2 text-textDark">🖇️ Attach Evidence (ፎቶ ወይም ሰነድ ያያይዙ)</label>
-            <div className="relative border-2 border-dashed border-gray-200 rounded-xl p-6 hover:border-primary/50 transition-colors group">
-              <input
-                type="file"
-                id="evidenceFile"
-                onChange={handleFileChange}
-                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
-              />
-              <div className="text-center">
-                <div className="text-4xl mb-2 text-gray-400 group-hover:text-primary transition-colors">📁</div>
-                <p className="text-textLight font-medium">
-                  {file ? file.name : "Click or drag to upload file (Optional)"}
-                </p>
-                <p className="text-xs text-gray-400 mt-1">Images or Documents (MAX 10MB)</p>
-              </div>
-            </div>
-            {isUploading && (
-              <div className="mt-4">
-                <div className="h-2 w-full bg-gray-100 rounded-full overflow-hidden">
-                  <div 
-                    className="h-full bg-primary transition-all duration-300" 
-                    style={{ width: `${uploadProgress}%` }}
-                  ></div>
-                </div>
-                <p className="text-xs text-primary mt-2 flex justify-between">
-                  <span>Uploading evidence...</span>
-                  <span>{Math.round(uploadProgress)}%</span>
-                </p>
-              </div>
-            )}
-          </div>
 
           <div className="form-group md:col-span-2">
             <label htmlFor="violationDescription" className="block font-semibold mb-2 text-textDark">Additional Information</label>
@@ -312,10 +219,9 @@ const ReportForm = () => {
           <div className="md:col-span-2 text-center mt-4">
             <button 
               type="submit" 
-              disabled={isUploading}
-              className={`btn min-w-[250px] py-4 text-lg ${isUploading ? 'opacity-50 cursor-not-allowed' : ''}`}
+              className="btn min-w-[250px] py-4 text-lg"
             >
-              {isUploading ? 'Processing...' : 'Submit Report (ሪፖርቱን ላክ)'}
+              Submit Report (ሪፖርቱን ላክ)
             </button>
           </div>
         </form>
