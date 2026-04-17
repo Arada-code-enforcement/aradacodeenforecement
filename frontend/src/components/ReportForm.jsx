@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { db, storage } from '../firebase';
 import { collection, addDoc } from 'firebase/firestore';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+import imageCompression from 'browser-image-compression';
 
 const ReportForm = () => {
   const [formData, setFormData] = useState({
@@ -30,37 +31,50 @@ const ReportForm = () => {
     }
   };
 
-  const uploadFile = () => {
-    return new Promise((resolve, reject) => {
-      if (!file) {
-        resolve(null);
-        return;
-      }
+  const uploadFile = async () => {
+    if (!file) return null;
 
-      const storageRef = ref(storage, `reports/${Date.now()}_${file.name}`);
-      const uploadTask = uploadBytesResumable(storageRef, file);
+    try {
+      // 1. Compression
+      const options = {
+        maxSizeMB: 1,
+        maxWidthOrHeight: 1920,
+        useWebWorker: true,
+      };
+      
+      const compressedFile = await imageCompression(file, options);
+      
+      // 2. Upload
+      return new Promise((resolve, reject) => {
+        const storageRef = ref(storage, `reports/${Date.now()}_${file.name}`);
+        const uploadTask = uploadBytesResumable(storageRef, compressedFile);
 
-      setIsUploading(true);
+        setIsUploading(true);
 
-      uploadTask.on(
-        'state_changed',
-        (snapshot) => {
-          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          setUploadProgress(progress);
-        },
-        (error) => {
-          console.error("Upload error:", error);
-          setIsUploading(false);
-          reject(error);
-        },
-        async () => {
-          const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-          setIsUploading(false);
-          resolve(downloadURL);
-        }
-      );
-    });
+        uploadTask.on(
+          'state_changed',
+          (snapshot) => {
+            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            setUploadProgress(progress);
+          },
+          (error) => {
+            console.error("Upload error:", error);
+            setIsUploading(false);
+            reject(error);
+          },
+          async () => {
+            const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+            setIsUploading(false);
+            resolve(downloadURL);
+          }
+        );
+      });
+    } catch (error) {
+      console.error("Compression error:", error);
+      throw error;
+    }
   };
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();

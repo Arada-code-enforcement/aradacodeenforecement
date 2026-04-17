@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { db, storage } from '../firebase';
 import { collection, addDoc } from 'firebase/firestore';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+import imageCompression from 'browser-image-compression';
 
 const ComplimentForm = () => {
   const [formData, setFormData] = useState({
@@ -36,17 +37,25 @@ const ComplimentForm = () => {
     }
   };
 
-  const uploadFile = () => {
-    return new Promise((resolve, reject) => {
-      if (!file) {
-        resolve(null);
-        return;
-      }
+  const uploadFile = async () => {
+    if (!file) return null;
 
-      const storageRef = ref(storage, `compliments/${Date.now()}_${file.name}`);
-      const uploadTask = uploadBytesResumable(storageRef, file);
+    try {
+      // 1. Compression
+      const options = {
+        maxSizeMB: 1,
+        maxWidthOrHeight: 1920,
+        useWebWorker: true,
+      };
+      
+      const compressedFile = await imageCompression(file, options);
+      
+      // 2. Upload
+      return new Promise((resolve, reject) => {
+        const storageRef = ref(storage, `compliments/${Date.now()}_${file.name}`);
+        const uploadTask = uploadBytesResumable(storageRef, compressedFile);
 
-      setIsUploading(true);
+        setIsUploading(true);
 
       uploadTask.on(
         'state_changed',
@@ -65,7 +74,11 @@ const ComplimentForm = () => {
           resolve(downloadURL);
         }
       );
-    });
+      });
+    } catch (error) {
+      console.error("Compression error:", error);
+      throw error;
+    }
   };
 
   const handleSubmit = async (e) => {
