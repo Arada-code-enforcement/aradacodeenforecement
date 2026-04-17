@@ -1,11 +1,15 @@
 import mainBg from '../assets/main-bg.jpg';
+import media1 from '../assets/media1.jpg';
+import media2 from '../assets/media2.jpg';
+import media3 from '../assets/media3.jpg';
+import media4 from '../assets/media4.jpg';
 
 const Gallery = () => {
   const images = [
-    { src: mainBg, title: 'Arada Sub-City Hub', desc: 'The architectural heart of our modern sub-city administrative district.' },
-    { src: 'https://images.unsplash.com/photo-1541970233221-70d7c83da4b3?auto=format&fit=crop&w=800&q=80', title: 'Official Briefing', desc: 'Official announcement and regulatory updates.' },
-    { src: 'https://images.unsplash.com/photo-1577412647305-991150c7d163?auto=format&fit=crop&w=800&q=80', title: 'Officer Orientation', desc: 'Internal staff training and code of conduct review.' },
-    { src: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80', title: 'Collaborative Meeting', desc: 'Working together for a safer and cleaner sub-city.' },
+    { src: media1, title: 'Arada Sub-City Hub', desc: 'The architectural heart of our modern sub-city administrative district.' },
+    { src: media2, title: 'Official Briefing', desc: 'Official announcement and regulatory updates.' },
+    { src: media3, title: 'Officer Orientation', desc: 'Internal staff training and code of conduct review.' },
+    { src: media4, title: 'Collaborative Meeting', desc: 'Working together for a safer and cleaner sub-city.' },
   ];
 
   return (
