@@ -1,5 +1,5 @@
 import React from 'react';
-import mainBg from '../assets/main-bg.jpg';
+import media4 from '../assets/media4.jpg';
 
 const PageBanner = ({ title, subtitle }) => {
   return (
@@ -7,7 +7,7 @@ const PageBanner = ({ title, subtitle }) => {
       {/* Background Image Overlay for Banners */}
       <div className="absolute inset-0 z-0 opacity-40">
         <img 
-          src={mainBg} 
+          src={media4} 
           alt="" 
           className="w-full h-full object-cover object-center"
           onError={(e) => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import mainBg from '../assets/main-bg.jpg';
+import media4 from '../assets/media4.jpg';
 
 const Header = () => {
   return (
@@ -9,7 +9,7 @@ const Header = () => {
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-r from-primary/60 to-darkFooter/40 z-10 transition-opacity duration-1000"></div>
         <img
-          src={mainBg}
+          src={media4}
           alt="Arada Sub-City"
           className="w-full h-full object-cover object-center animate-fade-in"
           onError={(e) => {
