@@ -11,7 +11,7 @@ const Header = () => {
         <img
           src={mainBg}
           alt="Arada Sub-City"
-          className="w-full h-full object-cover object-center animate-fade-in"
+          className="w-full h-full object-cover object-center"
           onError={(e) => {
             e.target.src = "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80";
           }}
@@ -20,7 +20,7 @@ const Header = () => {
 
       {/* Content */}
       <div className="relative z-20 max-w-[1200px] mx-auto px-5 text-center">
-        <div className="inline-block bg-white/10 backdrop-blur-md border border-white/20 text-white px-5 py-2 rounded-full text-sm font-medium tracking-wide mb-6 animate-fade-in-up hover:bg-white/20 transition-all cursor-default">
+        <div className="inline-block bg-white/10 backdrop-blur-md border border-white/20 text-white px-5 py-2 rounded-full text-sm font-medium tracking-wide mb-6 hover:bg-white/20 transition-all cursor-default">
           Arada Sub-City Administration
         </div>
 
