@@ -23,12 +23,18 @@ const AdminDashboard = () => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-      if (currentUser) {
-        fetchAllData();
+      if (currentUser && currentUser.email.toLowerCase().includes('wereda')) {
+        // Automatically log out wereda users from the admin dashboard
+        signOut(auth);
+        alert("Access Denied: Wereda accounts are not allowed to access the Admin Dashboard. Please use the Report page.");
+        setUser(null);
       } else {
-        setLoading(false);
+        setUser(currentUser);
+        if (currentUser) {
+          fetchAllData();
+        }
       }
+      setLoading(false);
     });
     return () => unsubscribe();
   }, []);
@@ -61,6 +67,13 @@ const AdminDashboard = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    
+    // Prevent wereda users from logging in via the admin screen
+    if (email.toLowerCase().includes('wereda')) {
+      alert("Access Denied: Wereda accounts are only for filing reports. Use the Report page to login.");
+      return;
+    }
+
     try {
       await signInWithEmailAndPassword(auth, email, password);
     } catch (error) {
