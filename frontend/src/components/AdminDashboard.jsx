@@ -64,7 +64,16 @@ const AdminDashboard = () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
     } catch (error) {
-      alert("Login failed. Check your credentials.");
+      console.error("Login Error:", error.code, error.message);
+      if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password' || error.code === 'auth/invalid-credential') {
+        alert("Incorrect email or password. Please try again.");
+      } else if (error.code === 'auth/too-many-requests') {
+        alert("Too many failed attempts. Please try again later.");
+      } else if (error.code === 'auth/network-request-failed') {
+        alert("Network error. Please check your internet connection.");
+      } else {
+        alert("Login failed: " + error.message);
+      }
     }
   };
 
