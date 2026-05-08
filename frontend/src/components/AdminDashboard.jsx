@@ -226,13 +226,13 @@ const AdminDashboard = () => {
     return (
       <div className="max-w-md mx-auto bg-white p-8 md:p-12 rounded-2xl shadow-sm border border-gray-100 flex flex-col gap-6">
         <div className="text-center">
-          <h2 className="text-3xl font-bold text-primary mb-2">Admin Login</h2>
-          <p className="text-textLight">Access restricted control panel</p>
+          <h2 className="text-3xl font-bold text-primary mb-2">Sub-City Admin Login</h2>
+          <p className="text-textLight">Restricted access for Sub-City members only</p>
         </div>
         <form onSubmit={handleLogin} className="flex flex-col gap-4">
           <input 
-            type="email" placeholder="Email Address" required value={email} onChange={(e)=>setEmail(e.target.value)}
-            className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all"
+            type="email" placeholder="Sub-City Email Address" required value={email} onChange={(e)=>setEmail(e.target.value)}
+            className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all font-sans"
           />
           <input 
             type="password" placeholder="Password" required value={password} onChange={(e)=>setPassword(e.target.value)}
