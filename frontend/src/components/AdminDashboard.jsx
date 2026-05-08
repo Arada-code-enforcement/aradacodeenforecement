@@ -10,6 +10,7 @@ const AdminDashboard = () => {
   const [password, setPassword] = useState('');
   
   const [activeTab, setActiveTab] = useState('reports');
+  const [weredaFilter, setWeredaFilter] = useState('all');
   const [submittedReports, setSubmittedReports] = useState([]);
   const [submittedCompliments, setSubmittedCompliments] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -95,6 +96,15 @@ const AdminDashboard = () => {
     setSubmittedReports([]);
     setSubmittedCompliments([]);
   };
+
+  // --- FILTERING LOGIC ---
+  const filteredReports = weredaFilter === 'all' 
+    ? submittedReports 
+    : submittedReports.filter(r => r.violationWereda?.toString() === weredaFilter);
+
+  const filteredCompliments = weredaFilter === 'all' 
+    ? submittedCompliments 
+    : submittedCompliments.filter(c => c.wereda?.toString() === weredaFilter);
 
   // --- DELETE HANDLERS ---
   const handleDeleteReport = async (id) => {
@@ -196,7 +206,7 @@ const AdminDashboard = () => {
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.setAttribute("href", url);
-    link.setAttribute("download", `${filename}_${new Date().toISOString().split('T')[0]}.csv`);
+    link.setAttribute("download", `${filename}_Filter_${weredaFilter}_${new Date().toISOString().split('T')[0]}.csv`);
     link.style.visibility = 'hidden';
     document.body.appendChild(link);
     link.click();
@@ -212,7 +222,7 @@ const AdminDashboard = () => {
     try {
       const opt = {
         margin: [0.5, 0.5],
-        filename: `${filename}_${new Date().toISOString().split('T')[0]}.pdf`,
+        filename: `${filename}_Filter_${weredaFilter}_${new Date().toISOString().split('T')[0]}.pdf`,
         image: { type: 'jpeg', quality: 0.98 },
         html2canvas: { 
           scale: 1.5, // Reduced from 2 for better performance
@@ -264,9 +274,22 @@ const AdminDashboard = () => {
           <h2 className="text-3xl font-bold text-primary">Admin Dashboard</h2>
           <p className="text-textLight text-sm mt-1">Logged in as {user.email}</p>
         </div>
-        <button onClick={handleLogout} className="bg-gray-100 text-gray-700 px-6 py-2.5 rounded-full font-semibold hover:bg-gray-200 transition-colors shadow-sm">
-          Logout
-        </button>
+        <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 bg-bgLight px-4 py-2 rounded-xl border border-gray-100">
+            <label className="text-xs font-bold text-textLight uppercase whitespace-nowrap">Filter Wereda:</label>
+            <select 
+              value={weredaFilter} 
+              onChange={(e)=>setWeredaFilter(e.target.value)}
+              className="bg-transparent border-none focus:ring-0 text-sm font-bold text-primary cursor-pointer"
+            >
+              <option value="all">Show All (ሁሉም)</option>
+              {[1,2,4,5,6,7,8,9].map(w => <option key={w} value={w.toString()}>Wereda 0{w}</option>)}
+            </select>
+          </div>
+          <button onClick={handleLogout} className="bg-gray-100 text-gray-700 px-6 py-2.5 rounded-full font-semibold hover:bg-gray-200 transition-colors shadow-sm">
+            Logout
+          </button>
+        </div>
       </div>
       
       {/* Tab Navigation */}
@@ -280,7 +303,7 @@ const AdminDashboard = () => {
           }`}
         >
           Finance Reports (የገቡ ሪፖርቶች)
-          <span className="ml-2 bg-white/20 px-2 py-0.5 rounded-full text-xs">{submittedReports.length}</span>
+          <span className="ml-2 bg-white/20 px-2 py-0.5 rounded-full text-xs">{filteredReports.length}</span>
         </button>
         
         <button 
@@ -305,7 +328,7 @@ const AdminDashboard = () => {
               <h3 className="text-2xl font-bold text-textDark">Submitted Reports</h3>
               <div className="flex gap-2">
                 <button 
-                  onClick={() => downloadCSV(submittedReports, "Finance_Reports")}
+                  onClick={() => downloadCSV(filteredReports, "Finance_Reports")}
                   className="flex items-center gap-2 bg-primary/10 text-primary hover:bg-primary hover:text-white px-4 py-2 rounded-lg font-bold transition-all text-sm"
                 >
                   <span>📥 Download Excel</span>
@@ -339,7 +362,7 @@ const AdminDashboard = () => {
                 </tr>
               </thead>
               <tbody className="text-sm">
-                {submittedReports.map((report) => (
+                {filteredReports.map((report) => (
                   <tr key={report.id} className="hover:bg-gray-50 transition-colors border-b border-gray-50">
                     <td className="p-3 sm:p-4 text-xs">{report.timestampDisplay}</td>
                     <td className="p-3 sm:p-4 font-medium">{report.reporterName || 'Anonymous'}</td>
@@ -364,7 +387,7 @@ const AdminDashboard = () => {
               </tbody>
             </table>
             </div>
-            {submittedReports.length === 0 && <div className="text-center py-12 text-gray-400">No finance reports have been submitted yet.</div>}
+            {filteredReports.length === 0 && <div className="text-center py-12 text-gray-400">No finance reports have been submitted for this selection.</div>}
           </>
         )}
 
@@ -375,7 +398,7 @@ const AdminDashboard = () => {
               <h3 className="text-2xl font-bold text-textDark">Submitted Compliments</h3>
               <div className="flex gap-2">
                 <button 
-                  onClick={() => downloadCSV(submittedCompliments, "Compliments")}
+                  onClick={() => downloadCSV(filteredCompliments, "Compliments")}
                   className="flex items-center gap-2 bg-[#27ae60]/10 text-[#27ae60] hover:bg-[#27ae60] hover:text-white px-4 py-2 rounded-lg font-bold transition-all text-sm"
                 >
                   <span>📥 Download Excel</span>
@@ -407,7 +430,7 @@ const AdminDashboard = () => {
                 </tr>
               </thead>
               <tbody className="text-sm">
-                {submittedCompliments.map((comp) => (
+                {filteredCompliments.map((comp) => (
                   <tr key={comp.id} className="hover:bg-gray-50 transition-colors border-b border-gray-50">
                     <td className="p-4 text-xs">{comp.timestampDisplay}</td>
                     <td className="p-4 font-medium">{comp.name || 'Anonymous'}</td>
@@ -424,7 +447,7 @@ const AdminDashboard = () => {
               </tbody>
             </table>
             </div>
-            {submittedCompliments.length === 0 && <div className="text-center py-12 text-gray-400">No compliments have been submitted yet.</div>}
+            {filteredCompliments.length === 0 && <div className="text-center py-12 text-gray-400">No compliments have been submitted for this selection.</div>}
           </>
         )}
 
