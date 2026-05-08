@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
-import { db, storage } from '../firebase';
+import React, { useState, useEffect } from 'react';
+import { db, auth } from '../firebase';
 import { collection, addDoc } from 'firebase/firestore';
-import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+import { signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth';
 
 const ReportForm = () => {
+  const [user, setUser] = useState(null);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [authLoading, setAuthLoading] = useState(true);
+
   const [formData, setFormData] = useState({
     reporterName: '',
     violationWereda: '',
@@ -16,12 +21,54 @@ const ReportForm = () => {
 
   const [isCustomAmount, setIsCustomAmount] = useState(false);
 
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      if (currentUser) {
+        // Try to extract wereda number from email (e.g., wereda01@... -> 1)
+        const emailLower = currentUser.email.toLowerCase();
+        const weredaMatch = emailLower.match(/wereda(\d+)/);
+        if (weredaMatch && weredaMatch[1]) {
+          const weredaNum = parseInt(weredaMatch[1], 10).toString();
+          setFormData(prev => ({ ...prev, violationWereda: weredaNum }));
+        }
+      }
+      setAuthLoading(false);
+    });
+    return () => unsubscribe();
+  }, []);
+
   const handleChange = (e) => {
     const { id, value } = e.target;
     setFormData((prev) => ({ ...prev, [id]: value }));
   };
 
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+    } catch (error) {
+      console.error("Login Error:", error.code, error.message);
+      if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password' || error.code === 'auth/invalid-credential') {
+        alert("Incorrect email or password. Please try again.");
+      } else {
+        alert("Login failed: " + error.message);
+      }
+    }
+  };
 
+  const handleLogout = async () => {
+    await signOut(auth);
+    setFormData({
+      reporterName: '',
+      violationWereda: '',
+      violationType: '',
+      violationRule: '',
+      penaltyAmount: '',
+      dailyStatus: '',
+      violationDescription: '',
+    });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,16 +76,21 @@ const ReportForm = () => {
       const newReportData = {
         ...formData,
         timestamp: new Date().toISOString(),
+        submittedBy: user.email,
       };
 
-      // 2. Save to Firestore
       await addDoc(collection(db, "reports"), newReportData);
 
       alert('Report Submitted Successfully! (ሪፖርቱ በትክክል ተልኳል)');
       
+      // Reset form but KEEP the wereda if it's locked by email
+      const emailLower = user.email.toLowerCase();
+      const weredaMatch = emailLower.match(/wereda(\d+)/);
+      const lockedWereda = weredaMatch && weredaMatch[1] ? parseInt(weredaMatch[1], 10).toString() : '';
+
       setFormData({
         reporterName: '',
-        violationWereda: '',
+        violationWereda: lockedWereda,
         violationType: '',
         violationRule: '',
         penaltyAmount: '',
@@ -52,8 +104,50 @@ const ReportForm = () => {
     }
   };
 
+  if (authLoading) {
+    return <div className="text-center py-24 text-textLight">Loading secure form...</div>;
+  }
+
+  if (!user) {
+    return (
+      <div className="max-w-md mx-auto bg-white p-8 md:p-12 rounded-2xl shadow-sm border border-gray-100 flex flex-col gap-6">
+        <div className="text-center">
+          <h2 className="text-3xl font-bold text-primary mb-2">Officer Login</h2>
+          <p className="text-textLight">Access restricted to Wereda Officers</p>
+        </div>
+        <form onSubmit={handleLogin} className="flex flex-col gap-4">
+          <input 
+            type="email" placeholder="Wereda Email (e.g. wereda01@arada.com)" required value={email} onChange={(e)=>setEmail(e.target.value)}
+            className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all font-sans"
+          />
+          <input 
+            type="password" placeholder="Password" required value={password} onChange={(e)=>setPassword(e.target.value)}
+            className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all font-sans"
+          />
+          <button type="submit" className="btn py-4 text-lg mt-2">Login to Report</button>
+        </form>
+      </div>
+    );
+  }
+
+  // Check if Wereda is locked from email
+  const isWeredaLocked = user.email.toLowerCase().includes('wereda');
+
   return (
     <div className="max-w-6xl mx-auto">
+      <div className="flex justify-between items-center mb-6 bg-white/50 backdrop-blur-sm p-4 rounded-xl border border-white/20">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">👤</div>
+          <div>
+            <p className="text-xs text-textLight font-bold uppercase tracking-wider">Logged in as</p>
+            <p className="text-sm font-bold text-textDark">{user.email}</p>
+          </div>
+        </div>
+        <button onClick={handleLogout} className="text-xs font-bold text-red-500 hover:text-red-700 transition-colors bg-white px-4 py-2 rounded-lg shadow-sm border border-gray-100">
+          LOGOUT
+        </button>
+      </div>
+
       <section id="report" className="bg-white p-8 md:p-12 rounded-2xl shadow-md border border-gray-100 mb-12 transition-all hover:shadow-lg">
         <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="form-group">
@@ -75,13 +169,15 @@ const ReportForm = () => {
               value={formData.violationWereda}
               onChange={handleChange}
               required
-              className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all bg-white font-sans"
+              disabled={isWeredaLocked}
+              className={`w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all bg-white font-sans ${isWeredaLocked ? 'bg-gray-50 text-gray-500 cursor-not-allowed opacity-80' : ''}`}
             >
               <option value="">ወረዳ--</option>
               {[1, 2, 4, 5, 6, 7, 8, 9].map((w) => (
                 <option key={w} value={w}>ወረዳ 0{w}</option>
               ))}
             </select>
+            {isWeredaLocked && <p className="text-[10px] text-primary mt-1 font-bold italic">Locked to your assigned Wereda</p>}
           </div>
 
           <div className="form-group">
@@ -230,4 +326,4 @@ const ReportForm = () => {
   );
 };
 
-export default ReportForm;
+export default ReportForm;
