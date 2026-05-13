@@ -10,7 +10,7 @@ const ReportForm = () => {
   const [authLoading, setAuthLoading] = useState(true);
 
   const [formData, setFormData] = useState({
-    reporterName: '',
+    Name: '',
     violationWereda: '',
     violationType: '',
     violationRule: '',
@@ -60,7 +60,7 @@ const ReportForm = () => {
   const handleLogout = async () => {
     await signOut(auth);
     setFormData({
-      reporterName: '',
+      Name: '',
       violationWereda: '',
       violationType: '',
       violationRule: '',
@@ -89,7 +89,7 @@ const ReportForm = () => {
       const lockedWereda = weredaMatch && weredaMatch[1] ? parseInt(weredaMatch[1], 10).toString() : '';
 
       setFormData({
-        reporterName: '',
+        Name: '',
         violationWereda: lockedWereda,
         violationType: '',
         violationRule: '',
@@ -190,17 +190,17 @@ const ReportForm = () => {
               className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all bg-white font-sans"
             >
               <option value="">-- የደንብ ጥሰት አይነት--</option>
-              <option value="zoning-land">ህገ ወጥ መሬት ወረራ ቁጥጥር</option>
-              <option value="illegal-construction">ህገ ወጥ ግንባታ ቁጥጥር</option>
-              <option value="zoning-expansion">ህገ ወጥ መሬት ማስፋፋት ቁጥጥር</option>
-              <option value="street-vending">ህገ ወጥ ጎዳና ንግድ ቁጥጥር</option>
-              <option value="sanitation-waste">ህገ ወጥ ደረቅና ፋሳሽ ቆሻሻ ቁጥጥር</option>
-              <option value="animal-slaughter">ህገ ወጥ የእንስሳት እርድ ቁጥጥር</option>
-              <option value="business-usage">ህገ ወጥ ንግድ አጠቃቀም ቁጥጥር</option>
-              <option value="public-disturbance">ህገ ወጥ አዋኪ ድርጊት ቁጥጥር</option>
-              <option value="advertisement">ህገ ወጥ ማስታወቂያ ቁጥጥር</option>
+              <option value="zoning-land">ህገ ወጥ መሬት ወረራ </option>
+              <option value="illegal-construction">ህገ ወጥ ግንባታ </option>
+              <option value="zoning-expansion">ህገ ወጥ መሬት ማስፋፋት </option>
+              <option value="street-vending">ህገ ወጥ ጎዳና ንግድ </option>
+              <option value="sanitation-waste">ህገ ወጥ ደረቅና ፋሳሽ ቆሻሻ </option>
+              <option value="animal-slaughter">ህገ ወጥ የእንስሳት እርድ </option>
+              <option value="business-usage">ህገ ወጥ ንግድ አጠቃቀም </option>
+              <option value="public-disturbance">ህገ ወጥ አዋኪ ድርጊት </option>
+              <option value="advertisement">ህገ ወጥ ማስታወቂያ </option>
               <option value="regulation-180">በደንብ 180</option>
-              <option value="none">----</option>
+              <option value="none">-</option>
               <option value="other">Other</option>
             </select>
           </div>
@@ -220,7 +220,7 @@ const ReportForm = () => {
               <option value="167/2016-org">ድርጅት በደ/ቁጥር 167/2016</option>
               <option value="180/2017-individual">ግለሰብ በደ/ቁጥር 180/2017</option>
               <option value="180/2017-org">ድርጅት በደ/ቁጥር 180/2017</option>
-              <option value="none">----</option>
+              <option value="none">-</option>
               <option value="other">Other</option>
             </select>
           </div>
@@ -326,4 +326,4 @@ const ReportForm = () => {
   );
 };
 
-export default ReportForm;
+export default ReportForm;
