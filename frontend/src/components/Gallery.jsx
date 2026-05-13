@@ -10,8 +10,8 @@ const Gallery = () => {
     { src: media2, title: 'Official Briefing', desc: 'Official announcement and regulatory updates.' },
     { src: media3, title: 'Officer Orientation', desc: 'Internal staff training and code of conduct review.' },
     { src: media4, title: 'Collaborative Meeting', desc: 'Working together for a safer and cleaner sub-city.' },
+    { src: media5, title: 'Officer Orientation', desc: 'Internal staff training and code of conduct review.' },
   ];
-
   return (
     <section className="py-16">
       <div className="text-center mb-12">
