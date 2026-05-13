@@ -3,7 +3,7 @@ import media1 from '../assets/media1.jpg';
 import media2 from '../assets/media2.jpg';
 import media3 from '../assets/media3.jpg';
 import media4 from '../assets/media4.jpg';
-
+import media5 from '../assets/media5.jpg';
 const Gallery = () => {
   const images = [
     { src: media1, title: 'Arada Sub-City Hub', desc: 'The architectural heart of our modern sub-city administrative district.' },
