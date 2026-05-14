@@ -65,9 +65,7 @@ const Footer = () => {
                 <div>
                   <span className="block text-white font-medium">Email</span>
                   <a href="mailto:info@arada-enforcement.com" className="hover:text-primary transition-colors">info@arada-enforcement.com</a>
-                </div> 
-                <span className="block text-white font-medium">Email</span>
-                  <a href="mailto:alexsamii554@gmail.com" className="hover:text-primary transition-colors">alexsamii554@gmail.com</a>
+                   <a href="mailto:alexsaamii554@gmail.com" className="hover:text-primary transition-colors">alexsaamii554@gmail.com</a>
                 </div>
               </li>
             </ul>
