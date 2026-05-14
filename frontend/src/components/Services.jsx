@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 const services = [
   {
     icon: '🌍',
-    title: 'Illegal Land Occupation Control',
-    titleAm: 'ህገ ወጥ መሬት ወረራ ቁጥጥር',
+    title:'ህገ ወጥ መሬት ወረራ ቁጥጥር',
+    titleAm:'Illegal Land Occupation Control',
     description:
       'Investigating and resolving cases of unauthorized land seizure and expansion to protect the rights of rightful landowners and communities.',
     color: 'green',
