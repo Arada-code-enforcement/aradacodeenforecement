@@ -12,64 +12,64 @@ const services = [
   },
   {
     icon: '🏗️',
-    title: 'Illegal Construction Control',
-    titleAm: 'ህገ ወጥ ግንባታ ቁጥጥር',
+    title:'ህገ ወጥ ግንባታ ቁጥጥር',
+    titleAm:'Illegal Construction Control', 
     description:
       'We inspect and take action on unauthorized construction activities, ensuring all buildings comply with Addis Ababa city regulations and permit requirements.',
     color: 'blue',
   },
   {
     icon: '📏',
-    title: 'Illegal Land Expansion Control',
-    titleAm: 'ህገ ወጥ መሬት ማስፋፋት ቁጥጥር',
+    title:'ህገ ወጥ መሬት ማስፋፋት ቁጥጥር',
+    titleAm:'Illegal Land Expansion Control', 
     description:
       'Enforcing regulations against unauthorized expansion of land boundaries into public or neighboring properties.',
     color: 'teal',
   },
   {
     icon: '🏪',
-    title: 'Street Vending Control',
-    titleAm: 'ህገ ወጥ ጎዳና ንግድ ቁጥጥር',
+    title:'ህገ ወጥ ጎዳና ንግድ ቁጥጥር',
+    titleAm: 'Street Vending Control',
     description:
       'Managing unauthorized street vending and trade activities to ensure orderly commerce while supporting legitimate vendors.',
     color: 'indigo',
   },
   {
     icon: '🗑️',
-    title: 'Waste & Sanitation Control',
-    titleAm: 'ህገ ወጥ ደረቅና ፋሳሽ ቆሻሻ ቁጥጥር',
+    title:'ህገ ወጥ ደረቅና ፋሳሽ ቆሻሻ ቁጥጥር',
+    titleAm: 'Waste & Sanitation Control',
     description:
       'Enforcing proper waste disposal regulations, combating illegal dumping of solid and liquid waste, and keeping public spaces clean.',
     color: 'yellow',
   },
   {
     icon: '🐄',
-    title: 'Animal Slaughter Control',
-    titleAm: 'ህገ ወጥ የእንስሳት እርድ ቁጥጥር',
+    title:'ህገ ወጥ የእንስሳት እርድ ቁጥጥር',
+    titleAm:'Animal Slaughter Control',
     description:
       'Monitoring and enforcing regulations on animal slaughtering to ensure public health standards and prevent unauthorized slaughter.',
     color: 'orange',
   },
   {
     icon: '💼',
-    title: 'Illegal Business Usage Control',
-    titleAm: 'ህገ ወጥ ንግድ አጠቃቀም ቁጥጥር',
+    title:'ህገ ወጥ ንግድ አጠቃቀም ቁጥጥር',
+    titleAm:'Illegal Business Usage Control',
     description:
       'Regulating unauthorized business activities and ensuring businesses are operating according to proper zoning and licensing.',
     color: 'purple',
   },
   {
     icon: '🔊',
-    title: 'Public Disturbance Control',
-    titleAm: 'ህገ ወጥ አዋኪ ድርጊት ቁጥጥር',
+    title:'ህገ ወጥ አዋኪ ድርጊት ቁጥጥር',
+    titleAm:'Public Disturbance Control',
     description:
       'Addressing public nuisance, illegal noise pollution, and other disturbances to maintain a peaceful environment for all residents.',
     color: 'red',
   },
   {
     icon: '📢',
-    title: 'Illegal Advertisement Control',
-    titleAm: 'ህገ ወጥ ማስታወቂያ ቁጥጥር',
+    title:'ህገ ወጥ ማስታወቂያ ቁጥጥር',
+    titleAm:'Illegal Advertisement Control',
     description:
       'Removing unauthorized billboards, banners, and signage that violate city advertising standards and detract from the urban environment.',
     color: 'blue',
