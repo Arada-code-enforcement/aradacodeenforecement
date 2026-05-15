@@ -60,7 +60,7 @@ const Footer = () => {
                   9995
                 </div>
                  <div>
-                  <span className="block text-white font-medium">ቢሮ ስልክ</span>
+                  <span className="block text-white font-medium">የቢሮ ስልክ</span>
                   0111729076
                 </div>
               </li>
@@ -69,7 +69,9 @@ const Footer = () => {
                 <div>
                   <span className="block text-white font-medium">Email</span>
                   <a href="mailto:info@arada-enforcement.com" className="hover:text-primary transition-colors">info@arada-enforcement.com</a>
-                </div>
+                </div
+                <li className="flex items-start gap-3">
+                <span className="text-primary text-lg mt-0.5">📧</span>
                  <div>
                   <span className="block text-white font-medium">Email</span>
                    <a href="mailto:alexsaamii554@gmail.com" className="hover:text-primary transition-colors">alexsaamii554@gmail.com</a>
@@ -93,7 +95,7 @@ const Footer = () => {
             </div>
             <div>
               <span className="block text-[10px] uppercase tracking-widest text-gray-500 font-bold">Developed by</span>
-              <span className="text-white font-semibold text-sm group-hover:text-primary transition-colors tracking-wide">Alemu Samuel</span>
+              <span className="text-white font-semibold text-sm group-hover:text-primary transition-colors tracking-wide">Alex Samii</span>
             </div>
           </div>
         </div>
