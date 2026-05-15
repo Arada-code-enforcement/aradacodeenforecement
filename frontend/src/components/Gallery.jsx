@@ -4,14 +4,14 @@ import media2 from '../assets/media2.jpg';
 import media3 from '../assets/media3.jpg';
 import media4 from '../assets/media4.jpg';
 import media5 from '../assets/media5.jpg';
-import media6 from '../assets/media5.jpg';
+import media6 from '../assets/media6.jpg';
 const Gallery = () => {
   const images = [
-    { src: media1, title: 'Arada Sub-City Hub', desc: 'The architectural heart of our modern sub-city administrative district.' },
-    { src: media2, title: 'Official Briefing', desc: 'Official announcement and regulatory updates.' },
-    { src: media3, title: 'Officer Orientation', desc: 'Internal staff training and code of conduct review.' },
+    { src: media1, title: 'ARADA PARK', desc: 'photo.' },
+    { src: media2, title: 'Shanbel Nurelign G/Kidan', desc: 'The architectural heart of our modern sub-city administrative district.' },
+    { src: media3, title: 'Abreham Mola', desc: 'Internal staff training and code of conduct review.' },
     { src: media4, title: 'Collaborative Meeting', desc: 'Working together for a safer and cleaner sub-city.' },
-    { src: media5, title: 'Officer Orientation', desc: 'Internal staff training and code of conduct review.' },
+    { src: media5, title: 'Mogase Tesfaye', desc: 'protect.' },
     { src: media6, title: 'Getacho chokle ', desc: 'resource.' },
   ];
   return (
