@@ -151,7 +151,7 @@ const ReportForm = () => {
       <section id="report" className="bg-white p-8 md:p-12 rounded-2xl shadow-md border border-gray-100 mb-12 transition-all hover:shadow-lg">
         <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="form-group">
-            <label htmlFor="reporterName" className="block font-semibold mb-2 text-textDark">👤 Full Name (ሙሉ ስም)</label>
+            <label htmlFor="reporterName" className="block font-semibold mb-2 text-textDark">👤 Name(ስም)</label>
             <input
               type="text"
               id="reporterName"
@@ -317,7 +317,7 @@ const ReportForm = () => {
               type="submit" 
               className="btn min-w-[250px] py-4 text-lg"
             >
-              Submit Report (ሪፖርቱን ላክ)
+              Submit Report 
             </button>
           </div>
         </form>
