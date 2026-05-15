@@ -8,11 +8,11 @@ import media6 from '../assets/media6.jpg';
 const Gallery = () => {
   const images = [
     { src: media1, title: 'ARADA PARK', desc: 'photo.' },
-    { src: media2, title: 'Shanbel Nurelign G/Kidan', desc: 'The architectural heart of our modern sub-city administrative district.' },
+    { src: media2, title: 'Shanbel Nurelign G/Kidan', desc: 'የአ/ክ/ደ/ማስከበር ጽ/ቤት ኃላፊ.' },
     { src: media3, title: 'Abreham Mola', desc: 'Internal staff training and code of conduct review.' },
     { src: media4, title: 'Collaborative Meeting', desc: 'Working together for a safer and cleaner sub-city.' },
-    { src: media5, title: 'Mogase Tesfaye', desc: 'protect.' },
-    { src: media6, title: 'Getacho chokle ', desc: 'resource.' },
+    { src: media5, title: 'Mogase Tesfaye', desc: 'የአ/ክ/ደ/ማስከበር ጽ/ቤት/ቁጥጥር አስተባባሪ.' },
+    { src: media6, title: 'Getacho chokle ', desc: 'asset store manager.' },
   ];
   return (
     <section className="py-16">
