@@ -77,7 +77,8 @@ const Footer = () => {
         </div>
 
         <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-gray-700 text-sm text-gray-400">
-          <p>&copy; {new Date().getFullYear()} Arada Sub-City Administration. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Arada Sub-City Administration. All rights reserved.</p
+            h1><marquee> እንኳን ደህና መጣችሁ በአራዳ ክፍለ ከተማ አስተዳደር ደንብ በር ጽ/ቤት Website </marquee>marquee></h1>                                                                                      
           <div className="mt-4 md:mt-0 flex items-center gap-3 bg-white/5 py-2 px-4 rounded-full border border-white/10 group hover:border-primary/50 transition-all">
             <div className="relative">
               <img 
