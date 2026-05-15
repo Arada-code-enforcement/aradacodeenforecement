@@ -190,15 +190,15 @@ const ReportForm = () => {
               className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all bg-white font-sans"
             >
               <option value="">-- የደንብ ጥሰት አይነት--</option>
-              <option value="zoning-land">ህገ ወጥ መሬት ወረራ </option>
-              <option value="illegal-construction">ህገ ወጥ ግንባታ </option>
-              <option value="zoning-expansion">ህገ ወጥ መሬት ማስፋፋት </option>
-              <option value="street-vending">ህገ ወጥ ጎዳና ንግድ </option>
-              <option value="sanitation-waste">ህገ ወጥ ደረቅና ፋሳሽ ቆሻሻ </option>
-              <option value="animal-slaughter">ህገ ወጥ የእንስሳት እርድ </option>
-              <option value="business-usage">ህገ ወጥ ንግድ አጠቃቀም </option>
-              <option value="public-disturbance">ህገ ወጥ አዋኪ ድርጊት </option>
-              <option value="advertisement">ህገ ወጥ ማስታወቂያ </option>
+              <option value="zoning-land">በህገ ወጥ መሬት ወረራ </option>
+              <option value="illegal-construction">በህገ ወጥ ግንባታ </option>
+              <option value="zoning-expansion">በህገ ወጥ መሬት ማስፋፋት </option>
+              <option value="street-vending">በህገ ወጥ ጎዳና ንግድ </option>
+              <option value="sanitation-waste">በህገ ወጥ ደረቅና ፋሳሽ ቆሻሻ </option>
+              <option value="animal-slaughter">በህገ ወጥ የእንስሳት እርድ </option>
+              <option value="business-usage">በህገ ወጥ ንግድ አጠቃቀም </option>
+              <option value="public-disturbance">በህገ ወጥ አዋኪ ድርጊት </option>
+              <option value="advertisement">በህገ ወጥ ማስታወቂያ </option>
               <option value="regulation-180">በደንብ 180</option>
               <option value="none">-</option>
               <option value="other">Other</option>
@@ -218,7 +218,7 @@ const ReportForm = () => {
               <option value="150/2015-org">ድርጅት በደ/ቁጥር 150/2015</option>
               <option value="167/2016-individual">ግለሰብ በደ/ቁጥር 167/2016</option>
               <option value="167/2016-org">ድርጅት በደ/ቁጥር 167/2016</option>
-              <option value="180/2017-individual">ግለሰብ በደ/ቁጥር 180/2017</option>
+              <option value="180/2017-ግለሰብ">ግለሰብ በደ/ቁጥር 180/2017</option>
               <option value="180/2017-org">ድርጅት በደ/ቁጥር 180/2017</option>
               <option value="none">-</option>
               <option value="other">Other</option>
