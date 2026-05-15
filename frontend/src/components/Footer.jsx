@@ -69,19 +69,12 @@ const Footer = () => {
                 <div>
                   <span className="block text-white font-medium">Email</span>
                   <a href="mailto:info@arada-enforcement.com" className="hover:text-primary transition-colors">info@arada-enforcement.com</a>
-                </div
-                <li className="flex items-start gap-3">
-                <span className="text-primary text-lg mt-0.5">📧</span>
-                 <div>
-                  <span className="block text-white font-medium">Email</span>
-                   <a href="mailto:alexsaamii554@gmail.com" className="hover:text-primary transition-colors">alexsaamii554@gmail.com</a>
                 </div>
               </li>
             </ul>
           </div>
 
         </div>
-
         <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-gray-700 text-sm text-gray-400">
           <p>&copy; {new Date().getFullYear()} Arada Sub-City Administration. All rights reserved.</p>                                                                                      
           <div className="mt-4 md:mt-0 flex items-center gap-3 bg-white/5 py-2 px-4 rounded-full border border-white/10 group hover:border-primary/50 transition-all">
