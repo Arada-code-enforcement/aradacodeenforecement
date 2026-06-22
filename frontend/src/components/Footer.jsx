@@ -88,7 +88,7 @@ const Footer = () => {
             </div>
             <div>
               <span className="block text-[10px] uppercase tracking-widest text-gray-500 font-bold">Developed by</span>
-              <span className="text-white font-semibold text-sm group-hover:text-primary transition-colors tracking-wide">Alex Samii</span>
+              <span className="text-white font-semibold text-sm group-hover:text-primary transition-colors tracking-wide">Alemu Samuel</span>
             </div>
           </div>
         </div>
