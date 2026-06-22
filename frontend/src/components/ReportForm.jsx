@@ -214,12 +214,12 @@ const ReportForm = () => {
               className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all bg-white font-sans"
             >
               <option value="">Choose Rule</option>
-              <option value="150/2015-individual">ግለሰብ በደ/ቁጥር 150/2015</option>
-              <option value="150/2015-org">ድርጅት በደ/ቁጥር 150/2015</option>
-              <option value="167/2016-individual">ግለሰብ በደ/ቁጥር 167/2016</option>
-              <option value="167/2016-org">ድርጅት በደ/ቁጥር 167/2016</option>
+              <option value="150/2015-ግለሰብ">ግለሰብ በደ/ቁጥር 150/2015</option>
+              <option value="150/2015-ድርጅት">ድርጅት በደ/ቁጥር 150/2015</option>
+              <option value="167/2016-ግለሰብ">ግለሰብ በደ/ቁጥር 167/2016</option>
+              <option value="167/2016-ድርጅት">ድርጅት በደ/ቁጥር 167/2016</option>
               <option value="180/2017-ግለሰብ">ግለሰብ በደ/ቁጥር 180/2017</option>
-              <option value="180/2017-org">ድርጅት በደ/ቁጥር 180/2017</option>
+              <option value="180/2017-ድርጅት">ድርጅት በደ/ቁጥር 180/2017</option>
               <option value="none">-</option>
               <option value="other">Other</option>
             </select>
