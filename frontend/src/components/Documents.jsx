@@ -4,6 +4,7 @@ const documents = [
   {
     id: 1,
     title: 'City Code Enforcement Regulation - Proclamation 180/2012',
+    titleAm: 'ደንብ ቁጥር 150.2015 ለማስፈፀም.pptx ',
     titleAm: 'የአዲስ አበባ ከተማ ደንብ ማስከበር ደንብ - አዋጅ ቁጥር 180/2012',
     category: 'Regulation',
     type: 'PDF',
