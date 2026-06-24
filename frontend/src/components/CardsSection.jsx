@@ -15,7 +15,7 @@ const CardsSection = () => {
       {/* Card 2 - Services */}
       <div className="bg-white/60 backdrop-blur-lg rounded-2xl p-8 text-center shadow-lg hover:-translate-y-2 hover:shadow-2xl transition-all duration-500 border border-white/40 border-t-[5px] border-primary group">
         <div className="text-5xl mb-4 text-primary">🛠️</div>
-        <h3 className="text-xl font-bold mb-2">Our Services</h3>
+        <h3 className="text-xl font-bold mb-2">Our Services(ስለእኛ አልግሎት) </h3>
         <p className="text-textLight mb-4 text-sm leading-relaxed">Discover the various code enforcement services we provide to keep our community safe.</p>
         <Link to="/services" className="btn w-full">View Services</Link>
       </div>
