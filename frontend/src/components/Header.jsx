@@ -26,7 +26,7 @@ const Header = () => {
 
         <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 tracking-tight drop-shadow-lg leading-tight"> 
           
-       Arada Sub-City Administration Code Enforcement <span className="text-greenTint opacity-90">Office</span>
+      Wel come to Arada Sub-City Administration Code Enforcement <span className="text-greenTint opacity-90">Office Website</span>
         </h1>
 
         <div className="flex flex-wrap justify-center gap-4">
