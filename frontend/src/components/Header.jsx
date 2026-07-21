@@ -21,7 +21,7 @@ const Header = () => {
       {/* Content */}
       <div className="relative z-20 max-w-[1200px] mx-auto px-5 text-center">
         <div className="inline-block bg-white/10 backdrop-blur-md border border-white/20 text-white px-5 py-2 rounded-full text-sm font-medium tracking-wide mb-6 hover:bg-white/20 transition-all cursor-default">
-          እንኳን ደህና መጣችሁ በአራዳ ክፍለ ከተማ አስተዳደር ደንብ በር ጽ/ቤት Website
+          እንኳን ደህና መጣችሁ በአራዳ ክፍለ ከተማ አስተዳደር ደንብ ማስከበር ጽ/ቤት Website
         </div>
 
         <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 tracking-tight drop-shadow-lg leading-tight"> 
