@@ -9,6 +9,7 @@ const ComplimentForm = () => {
     phone: '',
     wereda: '',
     topic: '',
+    nagaa: '',
     message: '',
   });
 
@@ -20,6 +21,7 @@ const ComplimentForm = () => {
       'comp-phone': 'phone',
       'comp-wereda': 'wereda',
       'comp-topic': 'topic',
+      'comp-essa jirta': 'nagaa',
       'comp-message': 'message'
     };
     if (fieldMap[id]) {
@@ -40,7 +42,7 @@ const ComplimentForm = () => {
       
       alert('Thank you for your compliment! We appreciate your feedback. (አድናቆትዎ በትክክል ተልኳል)');
       
-      setFormData({ name: '', phone: '', wereda: '', topic: '', message: '' });
+      setFormData({ name: '', phone: '', wereda: '', topic: '', nagaa:'',  message: '' });
     } catch (error) {
       console.error("Error saving compliment: ", error);
       alert("Error submitting compliment. Please check your connection.");
@@ -105,14 +107,14 @@ const ComplimentForm = () => {
               <option value="other">Other (ሌላ)</option>
             </select>
           </div>
-        </div>
+        
  <div className="form-group">
-            <label htmlFor="comp-topic" className="block font-semibold mb-2 text-textDark text-sm">Comment  (nagaa)</label>
+            <label htmlFor="comp-topic" className="block font-semibold mb-2 text-textDark text-sm">eessa jirta barbadeen si dhabe (nagaa)</label>
             <select id="comp-topic" required value={formData.topic} onChange={handleChange} className="w-full p-3.5 border border-gray-200 rounded-xl focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/5 transition-all bg-white outline-none font-sans">
               <option value="">-- jirta -- </option>
-              <option value="officer">Excellent Service by an Officer</option>
-              <option value="cleanliness">Improved Area Cleanliness</option>
-              <option value="response">Fast Response Time</option>
+              <option value="officer">nagadha</option>
+              <option value="cleanliness">jirta</option>
+              <option value="response"> aanaa</option>
               <option value="other">Other (ሌላ)</option>
             </select>
           </div>
