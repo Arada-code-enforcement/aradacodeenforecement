@@ -110,7 +110,7 @@ const ComplimentForm = () => {
         
  <div className="form-group">
             <label htmlFor="comp-topic" className="block font-semibold mb-2 text-textDark text-sm">eessa jirta barbadeen si dhabe (nagaa)</label>
-            <select id="comp-topic" required value={formData.topic} onChange={handleChange} className="w-full p-3.5 border border-gray-200 rounded-xl focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/5 transition-all bg-white outline-none font-sans">
+            <select id="comp-nagaa" required value={formData.topic} onChange={handleChange} className="w-full p-3.5 border border-gray-200 rounded-xl focus:outline-none focus:border-primary focus:ring-4 focus:ring-primary/5 transition-all bg-white outline-none font-sans">
               <option value="">-- jirta -- </option>
               <option value="officer">nagadha</option>
               <option value="cleanliness">jirta</option>
