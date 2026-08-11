@@ -186,13 +186,13 @@ const AdminDashboard = () => {
         `"${(item.violationDescription || '').replace(/"/g, '""')}"`
       ]);
     } else {
-      headers = ["Date", "Name", "Phone", "Wereda", "Topic", "Message"];
+      headers = ["Date", "Name", "Phone", "Wereda", "Topic", "nagaa","Message"];
       rows = data.map(item => [
         item.timestampDisplay,
         item.name || 'Anonymous',
         item.phone,
         item.wereda === 'all' ? 'General' : `Wereda ${item.wereda?.toString().padStart(2, '0')}`,
-        item.topic,
+        item.topic, item.nagaa,
         `"${(item.message || '').replace(/"/g, '""')}"`
       ]);
     }
@@ -425,6 +425,7 @@ const AdminDashboard = () => {
                   <th className="p-4 border-b">Phone</th>
                   <th className="p-4 border-b">Wereda</th>
                   <th className="p-4 border-b">Topic</th>
+                   <th className="p-4 border-b">nagaa</th>
                   <th className="p-4 border-b">Message</th>
                   <th className="p-4 border-b text-center">Actions</th>
                 </tr>
@@ -437,6 +438,7 @@ const AdminDashboard = () => {
                     <td className="p-4 font-mono">{comp.phone}</td>
                     <td className="p-4">{comp.wereda === 'all' ? 'General' : `ወረዳ ${comp.wereda?.toString().padStart(2, '0')}`}</td>
                     <td className="p-4 font-semibold text-[#27ae60]">{comp.topic}</td>
+                     <td className="p-4 font-semibold text-[#27ae60]">{comp.nagaa}</td>
                     <td className="p-4 text-xs italic text-textLight">{comp.message?.substring(0,40)}...</td>
                     <td className="p-4 flex gap-2 justify-center">
                       <button onClick={() => setEditingCompliment(comp)} className="bg-blue-100 hover:bg-blue-200 text-blue-700 px-3 py-1.5 rounded-lg text-xs font-bold transition-colors">Edit</button>
