@@ -103,8 +103,8 @@ const AdminDashboard = () => {
     : submittedReports.filter(r => r.violationWereda?.toString() === weredaFilter);
 
   const filteredCompliments = weredaFilter === 'all' 
-    ? submittedCompliments 
-    : submittedCompliments.filter(c => c.wereda?.toString() === weredaFilter);
+    ? submitted message 
+    : submitted message.filter(c => c.wereda?.toString() === weredaFilter);
 
   // --- DELETE HANDLERS ---
   const handleDeleteReport = async (id) => {
