@@ -298,8 +298,23 @@ const ReportForm = () => {
               <option value="none">በዛሬው ዕለት ቅጣት የለም</option>
             </select>
           </div>
-
-
+        
+          <div className="form-group">
+            <label htmlFor="dailyStatus" className="block font-semibold mb-2 text-textDark"> deparment </label>
+            <select
+              id="dailyStatus"
+              value={formData.dailyStatus}
+              onChange={handleChange}
+              required
+              className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all bg-white font-sans"
+            >
+              <option value="">Choose dep</option>
+              <option value="paid">Afan oromo (Collected)</option>
+              <option value="unpaid"> amharic (Not Collected)</option>
+              <option value="none"> tigray </option>
+            </select>
+          </div>
+          
           <div className="form-group md:col-span-2">
             <label htmlFor="violationDescription" className="block font-semibold mb-2 text-textDark">Additional Information</label>
             <textarea
