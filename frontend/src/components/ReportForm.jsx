@@ -189,9 +189,9 @@ const ReportForm = () => {
               required
               className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all bg-white font-sans"
             >
-              <option value="">-- sex--</option>
-              <option value="በህገ ወጥ መሬት "> ወንድ</option>
-              <option value="none">female</option>
+              <option value="sex">-- sex--</option>
+              <option value="ወንድ">ወንድ</option>
+              <option value="female">female</option>
               <option value="other">Other</option>
             </select>
           </div>
@@ -205,13 +205,12 @@ const ReportForm = () => {
               className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all bg-white font-sans"
             >
               <option value="">Choose </option>
-              <option value="150/2015-ግለሰብ">degree</option>
-              <option value="150/2015-ድርጅት">2nd degree</option>
-              <option value="167/2016-ግለሰብ">level IV</option>
-               <option value="167/2016-ግለሰብ">level III</option>
-              <option value="167/2016-ግለሰብ">level II </option>
-               <option value="167/2016-ግለሰብ">diploma </option>
-              <option value="none">-</option>
+              <option value="degree">degree</option>
+              <option value="2nd degree">2nd degree</option>
+              <option value="level IV">level IV</option>
+               <option value="level III">level III</option>
+              <option value="level II">level II </option>
+               <option value="diploma">diploma </option>
               <option value="other">Other</option>
             </select>
           </div>
