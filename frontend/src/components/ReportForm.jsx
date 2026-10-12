@@ -173,7 +173,7 @@ const ReportForm = () => {
               className={`w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all bg-white font-sans ${isWeredaLocked ? 'bg-gray-50 text-gray-500 cursor-not-allowed opacity-80' : ''}`}
             >
               <option value="">ወረዳ--</option>
-              {[1, 2, 4, 5, 6, 7, 8, 9].map((w) => (
+              {[1, 2, 4, 5, 6, 7, 8, 9,k/ketem].ap((w) => (
                 <option key={w} value={w}>ወረዳ 0{w}</option>
               ))}
             </select>
@@ -181,7 +181,7 @@ const ReportForm = () => {
           </div>
 
           <div className="form-group">
-            <label htmlFor="violationType" className="block font-semibold mb-2 text-textDark">የደንብ ጥሰት አይነት (Violation Type)</label>
+            <label htmlFor="violationType" className="block font-semibold mb-2 text-textDark"> sex(ዖታ)(Violation Type)</label>
             <select
               id="violationType"
               value={formData.violationType}
@@ -189,23 +189,14 @@ const ReportForm = () => {
               required
               className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all bg-white font-sans"
             >
-              <option value="">-- የደንብ ጥሰት አይነት--</option>
-              <option value="በህገ ወጥ መሬት ወረራ">በህገ ወጥ መሬት ወረራ </option>
-              <option value="በህገ ወጥ ግንባታ">በህገ ወጥ ግንባታ </option>
-              <option value="በህገ ወጥ መሬት ማስፋፋት">በህገ ወጥ መሬት ማስፋፋት </option>
-              <option value="በህገ ወጥ ጎዳና ንግድ">በህገ ወጥ ጎዳና ንግድ </option>
-              <option value="በህገ ወጥ ደረቅና ፋሳሽ ቆሻሻ ">በህገ ወጥ ደረቅና ፋሳሽ ቆሻሻ </option>
-              <option value="በህገ ወጥ የእንስሳት እርድ ">በህገ ወጥ የእንስሳት እርድ </option>
-              <option value="በህገ ወጥ ንግድ አጠቃቀም">በህገ ወጥ ንግድ አጠቃቀም </option>
-              <option value="በህገ ወጥ አዋኪ ድርጊት ">በህገ ወጥ አዋኪ ድርጊት </option>
-              <option value="በህገ ወጥ ማስታወቂያ">በህገ ወጥ ማስታወቂያ </option>
-              <option value="በደንብ 180">በደንብ 180</option>
-              <option value="none">-</option>
+              <option value="">-- sex--</option>
+              <option value="በህገ ወጥ መሬት "> ወንድ</option>
+              <option value="none">female</option>
               <option value="other">Other</option>
             </select>
           </div>
           <div className="form-group">
-            <label htmlFor="violationRule" className="block font-semibold mb-2 text-textDark">Select (ደንብ ቁጥር)</label>
+            <label htmlFor="violationRule" className="block font-semibold mb-2 text-textDark">Select position</label>
             <select
               id="violationRule"
               value={formData.violationRule}
@@ -213,13 +204,13 @@ const ReportForm = () => {
               required
               className="w-full p-3 border border-gray-200 rounded-xl focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all bg-white font-sans"
             >
-              <option value="">Choose Rule</option>
-              <option value="150/2015-ግለሰብ">ግለሰብ በደ/ቁጥር 150/2015</option>
-              <option value="150/2015-ድርጅት">ድርጅት በደ/ቁጥር 150/2015</option>
-              <option value="167/2016-ግለሰብ">ግለሰብ በደ/ቁጥር 167/2016</option>
-              <option value="167/2016-ድርጅት">ድርጅት በደ/ቁጥር 167/2016</option>
-              <option value="180/2017-ግለሰብ">ግለሰብ በደ/ቁጥር 180/2017</option>
-              <option value="180/2017-ድርጅት">ድርጅት በደ/ቁጥር 180/2017</option>
+              <option value="">Choose </option>
+              <option value="150/2015-ግለሰብ">degree</option>
+              <option value="150/2015-ድርጅት">2nd degree</option>
+              <option value="167/2016-ግለሰብ">level IV</option>
+               <option value="167/2016-ግለሰብ">level III</option>
+              <option value="167/2016-ግለሰብ">level II </option>
+               <option value="167/2016-ግለሰብ">diploma </option>
               <option value="none">-</option>
               <option value="other">Other</option>
             </select>
