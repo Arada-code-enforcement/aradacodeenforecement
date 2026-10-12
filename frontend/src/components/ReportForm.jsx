@@ -257,7 +257,6 @@ const ReportForm = () => {
               >
                 <option value="">Choose Amount</option>
                 <option value="0">-</option>
-                <option value="100">100 ብር</option>
                 <option value="200">200 ብር</option>
                 <option value="300">300 ብር</option>
                 <option value="500">500 ብር</option>
