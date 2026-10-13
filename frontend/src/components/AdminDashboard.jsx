@@ -357,7 +357,7 @@ const AdminDashboard = () => {
                   <th className="p-3 sm:p-4 border-b">Rule</th>
                   <th className="p-3 sm:p-4 border-b">Amount</th>
                   <th className="p-3 sm:p-4 border-b">Status</th>
-                  <th className="p-3 sm:p-4 border-b">Details</th>
+                  <th className="p-3 sm:p-4 border-b">deprmant</th>
                   <th className="p-3 sm:p-4 border-b text-center">Actions</th>
                 </tr>
               </thead>
@@ -470,7 +470,7 @@ const AdminDashboard = () => {
                 <label className="block text-sm font-semibold mb-1">Wereda</label>
                 <select value={editingReport.violationWereda || ''} onChange={(e)=>setEditingReport({...editingReport, violationWereda: e.target.value})} className="w-full p-2 border rounded-lg">
                   <option value="">Select Wereda</option>
-                  {[1,2,4,5,6,7,8,9].map(w => <option key={w} value={w}>ወረዳ 0{w}</option>)}
+                  {[1,2,4,5,6,7,8,9.k/ketem].map(w => <option key={w} value={w}>ወረዳ 0{w}</option>)}
                 </select>
               </div>
               <div>
@@ -490,7 +490,7 @@ const AdminDashboard = () => {
                 <select value={editingReport.dailyStatus || ''} onChange={(e)=>setEditingReport({...editingReport, dailyStatus: e.target.value})} className="w-full p-2 border rounded-lg">
                    <option value="paid">Paid</option>
                    <option value="unpaid">Unpaid</option>
-                   <option value="none">None</option>
+                   <option value="none">1zur</option>
                 </select>
               </div>
               <div className="md:col-span-2">
@@ -525,7 +525,7 @@ const AdminDashboard = () => {
                 <label className="block text-sm font-semibold mb-1">Wereda</label>
                 <select value={editingCompliment.wereda || ''} onChange={(e)=>setEditingCompliment({...editingCompliment, wereda: e.target.value})} className="w-full p-2 border rounded-lg">
                   <option value="all">Sub-City General</option>
-                  {[1,2,4,5,6,7,8,9].map(w => <option key={w} value={w}>ወረዳ 0{w}</option>)}
+                  {[1,2,4,5,6,7,8,9,k/ketem,].map(w => <option key={w} value={w}>ወረዳ 0{w}</option>)}
                 </select>
               </div>
               <div>
