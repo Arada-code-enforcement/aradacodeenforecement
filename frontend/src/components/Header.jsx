@@ -31,7 +31,7 @@ const Header = () => {
 
         <div className="flex flex-wrap justify-center gap-4">
           <Link to="/report" className="bg-white text-primary px-8 py-3.5 rounded-full font-semibold shadow-lg hover:bg-gray-50 hover:shadow-xl transition-all transform hover:-translate-y-1">
-            File a Report
+            HRM Report
           </Link>
           <a href="#about" className="bg-transparent border-2 border-white/50 text-white px-8 py-3.5 rounded-full font-semibold hover:bg-white/10 hover:border-white transition-all">
             Learn More
