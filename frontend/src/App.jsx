@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Navbar from './components/Navbar';
 import CardsSection from './components/CardsSection';
-import ReportForm from './components/ReportForm';
+import HRM from './components/HRM Form';
 import ComplimentForm from './components/ComplimentForm';
 import Services from './components/Services';
 import News from './components/News';
